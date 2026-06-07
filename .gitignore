@@ -1,0 +1,48 @@
+# ==========================================
+# 🛑 SEGURANÇA: CHAVES DE API, SENHAS E ARQUIVOS SENSÍVEIS
+# ==========================================
+# Ignora arquivos de variáveis de ambiente (onde ficam suas senhas e chaves)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+credentials.json
+config.json
+secrets.json
+
+# ==========================================
+# 📦 DEPENDÊNCIAS DE JAVASCRIPT (Node.js)
+# ==========================================
+# Ignora a pasta gigante de bibliotecas que o comando 'npm install' baixa
+node_modules/
+jspm_packages/
+web_modules/
+.npm
+.eslintcache
+
+# Logs de erro (gerados automaticamente quando algo dá errado)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# 💻 SISTEMA OPERACIONAL (Linux)
+# ==========================================
+# Ignora arquivos temporários e miniaturas criadas pelo Linux
+.directory
+.Trash-*
+.fuse_hidden*
+.nfs*
+~*
+
+# ==========================================
+# 📝 EDITOR DE CÓDIGO (Visual Studio Code)
+# ==========================================
+# Ignora as configurações locais do seu VS Code que não importam para o projeto
+.vscode/
+!.vscode/extensions.json
+.history/
+*.code-workspace
