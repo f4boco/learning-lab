@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex6.3</title>
+</head>
+<body>
+    <script>
+        const palavra = prompt("Palavra: "); // lê a palavra
+        const tam = palavra.length; // otém o tamanho da palavra
+
+        // inverso inicia com a última letra da palavra em caixa alta
+        let inverso = palavra.charAt(tam-1).toUpperCase();
+
+        // percorre as demais letras de traz para frente e...
+        for (let i = tam - 2; i >= 0; i--) {
+            inverso += palavra.charAt(i).toLowerCase(); // converter-as em caixa baixa
+        }
+
+        // exibe a palavra e o inverso
+        alert("Palavra: " + palavra + "\nInverso: " + inverso);
+    </script>
+</body>
+</html>
