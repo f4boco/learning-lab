@@ -46,3 +46,9 @@ pnpm-debug.log*
 !.vscode/extensions.json
 .history/
 *.code-workspace
+
+# ==========================================
+# 🖼️ MÍDIAS E ARQUIVOS VISUAIS
+# ==========================================
+# Ignora a pasta "imagens" usadas nos de exercícios e desafios para evitar upload de arquivos pesados ou locais
+imagens/
