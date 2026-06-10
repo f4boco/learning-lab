@@ -50,5 +50,5 @@ pnpm-debug.log*
 # ==========================================
 # 🖼️ MÍDIAS E ARQUIVOS VISUAIS
 # ==========================================
-# Ignora a pasta "imagens" usadas nos de exercícios e desafios para evitar upload de arquivos pesados ou locais
+# Ignora a pasta "imagens" usadas nos exercícios e desafios para evitar upload de arquivos pesados ou locais
 imagens/
