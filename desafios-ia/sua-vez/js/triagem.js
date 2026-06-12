@@ -23,6 +23,7 @@ formularioTriagem.addEventListener("submit", function (e) {
     const nome = inNome.value.trim();
     const cpf = inCpf.value.trim();
     const telefone = inTelefone.value.trim();
+    const isPreferencial = inPreferencia.checked;
 
     // verifica se o nome é válido (precisa de nome e sobrenome)
     if (!nome.match(" ")) { // se a busca por " " retornar null (false), não tem sobrenomes
@@ -36,7 +37,7 @@ formularioTriagem.addEventListener("submit", function (e) {
         // \d{3} -> 3 números grudados      \.     -> seguidos por um ponto
         // \d{3} -> 3 números grudados      \.     -> seguidos por um ponto
         // \d{3} -> 3 números grudados       -     -> seguidos por um ifen
-        // \d{2} -> seguidos por mais 2 números grudados    (^ e $ São âncoras)
+        // \d{2} -> seguidos por mais 2 números grudados    (^ e $ são âncoras)
         alert("CPF Inválido...");
         inCpf.focus();
         return;
@@ -51,4 +52,32 @@ formularioTriagem.addEventListener("submit", function (e) {
         }
     }
 
+    // adiciona a pessoa na fila
+    adicionarFila(isPreferencial, nome, cpf, telefone);
+
 });
+
+// function para adicionar pessoal ao vetor fila
+function adicionarFila(isPreferencial, nome, cpf, telefone) {
+    let cll = telefone;
+    // transforma o telefone para "NI", se não tiver digitado
+    if (telefone == "") {
+        cll = "NI";
+    }
+
+    // cria o objeto da pessoa
+    const pessoa = {
+        id: Date.now(), // cria um ID único com base no tempo atual
+        nome: nome,
+        cpf: cpf,
+        telefone: cll,
+        preferencial: isPreferencial
+    }
+
+    // se for preferencial...
+    if (isPreferencial) { // adiciona ao início da fila
+        fila.unshift(pessoa);
+    } else { // adiciona ao final
+        fila.push(pessoa);
+    }
+}
