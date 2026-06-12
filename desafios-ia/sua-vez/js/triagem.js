@@ -11,8 +11,9 @@ const inCpf = document.getElementById("cpf");
 const inTelefone = document.getElementById("telefone");
 const inPreferencia = document.getElementById("preferencial");
 
-// vetor para guardar as pesoas da fila
-const fila = [];
+// vetores para guardar as pesoas da fila de espera e os já atendidos
+const filaEspera = [];
+const atendidos = [];
 
 // adiciona "ouvinte de eventos" ao formulario
 formularioTriagem.addEventListener("submit", function (e) {
@@ -74,10 +75,34 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
         preferencial: isPreferencial
     }
 
-    // se for preferencial...
-    if (isPreferencial) { // adiciona ao início da fila
-        fila.unshift(pessoa);
-    } else { // adiciona ao final
-        fila.push(pessoa);
+    // verifica se a pessoa já está na fila
+    if (!verificarEspera(cpf)) {
+        alert(nome + " já está na lista de Espera");
+        inNome.value = "";
+        inNome.focus();
+        return
+    } else {
+        // se for preferencial...
+        if (isPreferencial) { // adiciona ao início da fila
+            fila.unshift(pessoa);
+        } else { // adiciona ao final
+            fila.push(pessoa);
+        }
     }
+
+}
+
+// function que verifica se a pessoa já está na lista de espera
+function verificarEspera(cpf) {
+    let naFila;
+    
+    // percorre o vetor e compara o cpf
+    for (let pessoa of filaEspera) {
+        if (cpf == pessoa.cpf) {
+            naFila = true;
+            break;
+        }
+    }
+
+    return naFila;
 }
