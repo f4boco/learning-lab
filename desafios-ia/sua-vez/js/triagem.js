@@ -56,6 +56,9 @@ formularioTriagem.addEventListener("submit", function (e) {
     // adiciona a pessoa na fila
     adicionarFila(isPreferencial, nome, cpf, telefone);
 
+    // reseta o formulário para as próximas entradas
+    formularioTriagem.reset();
+
 });
 
 // function para adicionar pessoal ao vetor fila
@@ -68,7 +71,7 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
 
     // cria o objeto da pessoa
     const pessoa = {
-        id: Date.now(), // cria um ID único com base no tempo atual
+        id: "pessoaId-" + Date.now(), // cria um ID único com base no tempo atual
         nome: nome,
         cpf: cpf,
         telefone: cll,
@@ -76,17 +79,19 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
     }
 
     // verifica se a pessoa já está na fila
-    if (!verificarEspera(cpf)) {
+    if (verificarEspera(cpf)) {
         alert(nome + " já está na lista de Espera");
         inNome.value = "";
+        inCpf.value = "";
+        inPreferencia.checked = false;
         inNome.focus();
         return
     } else {
         // se for preferencial...
         if (isPreferencial) { // adiciona ao início da fila
-            fila.unshift(pessoa);
+            filaEspera.unshift(pessoa);
         } else { // adiciona ao final
-            fila.push(pessoa);
+            filaEspera.push(pessoa);
         }
     }
 
@@ -95,14 +100,17 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
 // function que verifica se a pessoa já está na lista de espera
 function verificarEspera(cpf) {
     let naFila;
-    
-    // percorre o vetor e compara o cpf
-    for (let pessoa of filaEspera) {
-        if (cpf == pessoa.cpf) {
-            naFila = true;
-            break;
+
+    // verifica se já existem pessoas na fila
+    if (filaEspera.length != 0) {
+        // percorre o vetor e compara o cpf
+        for (let pessoa of filaEspera) {
+            if (cpf == pessoa.cpf) {
+                naFila = true;
+                break;
+            }
         }
     }
-
+    
     return naFila;
 }
