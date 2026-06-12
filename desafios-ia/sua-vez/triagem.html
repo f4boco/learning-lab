@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Vez - Triagem</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <div class="cabecalho-logo">
+            <img src="imagens/logo-fila.svg" alt="Logo Sua Vez" class="logo-img">
+            <h1>Sua Vez <span class="tag-modulo">Triagem</span></h1>
+        </div>
+        <nav class="navegacao-sistema">
+            <a href="index.html">Início</a>
+            <a href="triagem.html" class="ativo">Triagem</a>
+            <a href="atendente.html">Atendente</a>
+            <a href="painel.html">Painel</a>
+        </nav>
+        <div class="cabecalho-data">
+            <span id="data-atual">--/--/----</span>
+        </div>
+    </header>
+
+    <main class="conteudo-principal">
+        <section class="painel-modulo">
+            <h2>Cadastrar Novo Cliente na Fila</h2>
+            <form id="formulario-triagem">
+                <div class="grupo-campo">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Ex: João da Silva" required>
+                </div>
+                <div class="grupo-campo">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                </div>
+                <div class="grupo-campo">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="grupo-checkbox">
+                    <input type="checkbox" id="preferencial">
+                    <label for="preferencial">Atendimento Preferencial (Idoso, Gestante, PCD)</label>
+                </div>
+                <button type="submit" class="botao-acao botao-salvar">Adicionar à Fila</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
