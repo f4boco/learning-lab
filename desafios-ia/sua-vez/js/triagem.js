@@ -23,7 +23,8 @@ formularioTriagem.addEventListener("submit", function (e) {
     // obter os conteúdos dos elementos de entrada
     const nome = inNome.value.trim();
     const cpf = inCpf.value.trim();
-    const telefone = inTelefone.value.trim();
+    // atribui o telefone de acordo com a entrada (* Pode ser melhorado depois)
+    const telefone = inTelefone.value.trim() == "" ? "NI" : inTelefone.value.trim();
     const isPreferencial = inPreferencia.checked;
 
     // verifica se o nome é válido (precisa de nome e sobrenome)
@@ -43,8 +44,8 @@ formularioTriagem.addEventListener("submit", function (e) {
         inCpf.focus();
         return;
     }
-    // verifica se foi digitado algum telefone
-    if (telefone != "") {
+    // verifica se foi digitado telefone
+    if (telefone != "NI") {
         // verifica se o telefone é válido
         if (!telefone.match(/^\d{2} \d{5}-\d{4}$/)) {
             alert("Telefone Inválido...");
@@ -63,18 +64,12 @@ formularioTriagem.addEventListener("submit", function (e) {
 
 // function para adicionar pessoal ao vetor fila
 function adicionarFila(isPreferencial, nome, cpf, telefone) {
-    let cll = telefone;
-    // transforma o telefone para "NI", se não tiver digitado
-    if (telefone == "") {
-        cll = "NI";
-    }
-
     // cria o objeto da pessoa
     const pessoa = {
         id: "pessoaId-" + Date.now(), // cria um ID único com base no tempo atual
         nome: nome,
         cpf: cpf,
-        telefone: cll,
+        telefone: telefone,
         preferencial: isPreferencial
     }
 
@@ -94,7 +89,6 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
             filaEspera.push(pessoa);
         }
     }
-
 }
 
 // function que verifica se a pessoa já está na lista de espera
