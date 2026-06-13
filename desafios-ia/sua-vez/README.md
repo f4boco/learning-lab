@@ -2,13 +2,13 @@
 
 Site que simula a fila de espera de um consultório médico.
 
-## Tecnologias
+## 📋 Tecnologias
 
 * HTML
 * CSS
 * JavaScript
 
-## Funcionalidades
+## ✨ Funcionalidades
 
 * Emissão de Senha: O usuário digita o nome e o sistema adiciona o paciente no final da fila
 (ou no inícios, se for preferencial);
@@ -16,16 +16,16 @@ Site que simula a fila de espera de um consultório médico.
 (com indicação de "em atendimento") e remove da lista de espera.
 
 
-## Como Executar
+## 🖥️ Como Executar
 
 Abra o arquivo principal no navegador.
 
-## Aprendizados
+## 🎯 Aprendizados
 
 * Vetores e métodos,
 * Strings e métodos,
 * condições, etc;
 
-## Autor
+## 👨‍💻 Autor
 
 Fabiano O.

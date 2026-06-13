@@ -78,6 +78,7 @@ function adicionarFila(isPreferencial, nome, cpf, telefone) {
         alert(nome + " já está na lista de Espera");
         inNome.value = "";
         inCpf.value = "";
+        inTelefone.value = "";
         inPreferencia.checked = false;
         inNome.focus();
         return
