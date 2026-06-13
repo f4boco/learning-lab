@@ -29,7 +29,10 @@ function exibirChat() {
         // extrai(slice) as letras do meio e substirui(replace) por *
         mensagem = mensagem.replace(sensurada.slice(1, sensurada.length -1), asteriscos);
     }
-    console.log(mensagem);
+    
+    
+    // exibir a mensagem na tela
+    outChat.innerText = mensagem;
 }
 // referencia o btEnviar e vincula function exibitChat ao evento click
 document.getElementById("btEnviar").addEventListener("click", exibirChat);
