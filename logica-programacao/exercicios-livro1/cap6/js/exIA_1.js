@@ -24,8 +24,10 @@ function exibirChat() {
 
     // percorre o vetor de palavras sensuradas
     for (let sensurada of palavrasSensuradas) {
-        const asteriscos = "*".repeat(sensurada.length);
-        mensagem = mensagem.replace(sensurada, asteriscos);
+        // gera a qtd estrelas considerando que vai exibir a 1ª e última letra
+        const asteriscos = "*".repeat(sensurada.length - 2);
+        // extrai(slice) as letras do meio e substirui(replace) por *
+        mensagem = mensagem.replace(sensurada.slice(1, sensurada.length -1), asteriscos);
     }
     console.log(mensagem);
 }
