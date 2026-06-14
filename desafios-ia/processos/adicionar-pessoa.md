@@ -64,10 +64,19 @@ FIM.
     O sistema verifica se a pessoa é preferencial
 
     SIM:
-        2. O sistema adiciona a pessoa no início do vetor.
+    O sistema busca pela última posição do vetor que o preferêcial é true
+
+        DECISÃO:
+        O sistema verifica se o retono é -1 (sigbifica que não há preferencial)
+
+        SIM:
+        2. O sistema adiciona a pessoa ao início do vetor
+
+        NÃO:
+        2. O sistema adiciona a pessoa na posição do vetor que o preferêcial é true, + 1
     
     NÃO:
-        2. O sistema adiciona a pessoa no final do Vetor.
+    2. O sistema adiciona a pessoa no final do Vetor.
     
     3. Exibe a Senha.
     4. Retorna ao fluxo principal. 
