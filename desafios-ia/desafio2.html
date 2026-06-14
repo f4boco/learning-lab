@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Desafio 2</title>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <h1>Sistema de Fila do Consultório</h1>
+        <small>Desafio 2 - IA</small>
+    </header>
+
+    <div class="conteiner-conteudo">
+        <main>
+            <section class="secao-entradas">
+                <h2>Triagem de Pacientes</h2>
+                <form id="formulario-cadastro">
+                    <label for="inNome">Nome: *</label>
+                    <input type="text" id="inNome" placeholder="Nome Completo" required autofocus>
+                    <label for="inCPF">CPF: *</label>
+                    <input type="text" id="inCPF" placeholder="000.000.000-00" required>
+                    <label for="inTelefone">Telefone: </label>
+                    <input type="text" id="inTelefone" placeholder="00 00000-0000">
+                    <div style="text-align: center; margin-top: 10px;">
+                        <input type="checkbox" id="inPreferencial">
+                        <small>Preferencial</small>
+                    </div>
+                    <button type="submit">Adicionar</button>
+                </form>
+            </section>
+
+            <section class="secao-saida">
+                <h2>Painel de Atendimento</h2>
+                <pre id="outEspera"></pre>
+            </section>
+        </main>
+    </div>
+
+    <footer class="rodape">
+        <small>Fabiano O. &copy; 2026</small>
+    </footer>
+
+    <script src="js/desafio2.js"></script>
+</body>
+
+</html>
