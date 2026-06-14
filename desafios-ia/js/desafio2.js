@@ -10,6 +10,7 @@ const inNome = document.getElementById("inNome");
 const inCPF = document.getElementById("inCPF");
 const inTelefone = document.getElementById("inTelefone");
 const inPreferencial = document.getElementById("inPreferencial");
+const outEspera = document.getElementById("outEspera");
 
 // variáveis globais
 const listaEspera = [];
@@ -69,6 +70,9 @@ formulario.addEventListener("submit", function (e) {
 
     }
 
+    // chama a function de exibir lista de espera
+    exibirEspera();
+
     // reseta o formulário para adicionar próximo paciente
     formulario.reset();
 });
@@ -112,7 +116,7 @@ function addFila(objetoPessoa) {
 
 // function que exibe a lista de espera
 function exibirEspera() {
-    let lista = "___ Lista de Espera ___\n"; // variável para receber alista de espera
+    let lista = "___ Lista de Espera ___\n\n"; // variável para receber alista de espera
     
     // verifica se o vetor está vazio
     if (verificarVazio()) {
@@ -120,12 +124,25 @@ function exibirEspera() {
     } else {
         // percorre o vetor
         for (const pessoa of listaEspera) {
-            // 
+            // concatena a ficha + nome e cpf com LGPD
+            lista += prepararLGPD(pessoa.nome, pessoa.cpf) + " - Ficha Nº: " + pessoa.ficha  + "\n";
         }
     }
+
+    // exibe lista na outEspera
+    outEspera.innerText = lista;
 }
+// chama a função no carregamento do site
+exibirEspera();
 
 // function para preparar retornar o 1º nome e o CPF com **
 function prepararLGPD(nomeCompleto, cpf) {
+    // obtém o primeiro nome da pessoa
+    const primEspaco = nomeCompleto.indexOf(" "); // obtém a posição do primeiro espaço
+    const nome = nomeCompleto.slice(0, primEspaco); // extrai parte da string, até o espaço -1;
     
+    // busca a combinação ".000.000.", no cpf e substitui por ".***.***."
+    const cpfLGPD = cpf.replace(/\.\d{3}\.\d{3}/, ".***.***");
+
+    return nome + " (" + cpfLGPD + ")";
 }
