@@ -13,7 +13,7 @@ const inPreferencial = document.getElementById("inPreferencial");
 
 // variáveis globais
 const listaEspera = [];
-let ficha;
+let ficha = 0;
 
 // adiciona "ouvinte" ao formulário
 formulario.addEventListener("submit", function (e) {
@@ -24,7 +24,7 @@ formulario.addEventListener("submit", function (e) {
     const nome = inNome.value.trim();
     const cpf = inCPF.value.trim();
     const telefone = inTelefone.value.trim() == "" ? "NI" : inTelefone.value.trim();
-    const siPreferencial = inPreferencial.checked;
+    const isPreferencial = inPreferencial.checked;
 
     // verifica se o nome é válido
     if (nome == "" || !nome.match(/ /g)) {
@@ -48,6 +48,61 @@ formulario.addEventListener("submit", function (e) {
         }
     }
 
+    // verifica se a pessoa já está na lista de espera
+    if (verificarFila(cpf)) {
+        alert("Esta pessoa já está na fila de espera");
+    } else {
+        ficha++; // adiciona a próxima ficha para essa pessoa
+
+        // cria o objeto de pessoa.
+        const pessoa = {
+            id = "espera-" + Date.now(),
+            nome: nome,
+            cpf: cpf,
+            telefone: telefone,
+            preferencial: isPreferencial,
+            ficha: ficha.padStart(3, "0") // coloca ficha com o padrão de 0 a esquerda
+        }
+
+        // adiciona a pessoa a lista
+        addFila(pessoa);
+
+    }
+
     // reseta o formulário para adicionar próximo paciente
     formulario.reset();
 });
+
+// functio que verifica se o vetor está vazio
+function verificarVazio() {
+    let isVazio = false;
+    if (listaEspera.length == 0)
+        isVazio = true;
+    return isVazio;
+}
+
+// function que verifica se a pessoa já está na fila (vetor)
+function verificarFila(cpf) {
+    let naFila = false;
+    // verifica se o vetor não está vazio.
+    if (!verificarVazio()) {
+        // percorre os elementos do vetor
+        for (const pessoa of listaEspera) {
+            // verifica se os cpfs são iguais
+            if (pessoa.cpf == cpf) {
+                naFila = true;
+                break;
+            }
+        }
+    }
+    return naFila;
+}
+
+// function que adiciona um objeto de pessoa ao vetor
+function addFila(objetoPessoa) {
+    // verifica se a pessoa é preferencial
+    if (objetoPessoa.preferencial)
+        listaEspera.unshift(objetoPessoa);
+    else
+        listaEspera.push(objetoPessoa);
+}
