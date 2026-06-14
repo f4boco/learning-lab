@@ -109,3 +109,23 @@ function addFila(objetoPessoa) {
     // exibe a ficha da pessoa na tela
     alert("Ficha:\n" + objetoPessoa.ficha);
 }
+
+// function que exibe a lista de espera
+function exibirEspera() {
+    let lista = "___ Lista de Espera ___\n"; // variável para receber alista de espera
+    
+    // verifica se o vetor está vazio
+    if (verificarVazio()) {
+        lista += "Não há fila de espera";
+    } else {
+        // percorre o vetor
+        for (const pessoa of listaEspera) {
+            // 
+        }
+    }
+}
+
+// function para preparar retornar o 1º nome e o CPF com **
+function prepararLGPD(nomeCompleto, cpf) {
+    
+}
