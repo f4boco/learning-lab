@@ -19,7 +19,7 @@ let ficha = 0;
 formulario.addEventListener("submit", function (e) {
     // impede que a página recarregue e limpe o código js
     e.preventDefault();
-
+    
     // obtém o conteúdo dos inputs
     const nome = inNome.value.trim();
     const cpf = inCPF.value.trim();
@@ -56,12 +56,12 @@ formulario.addEventListener("submit", function (e) {
 
         // cria o objeto de pessoa.
         const pessoa = {
-            id = "espera-" + Date.now(),
+            id: "espera-" + Date.now(),
             nome: nome,
             cpf: cpf,
             telefone: telefone,
             preferencial: isPreferencial,
-            ficha: ficha.padStart(3, "0") // coloca ficha com o padrão de 0 a esquerda
+            ficha: ficha.toString().padStart(3, "0") // converte a ficha para string e coloca ficha com o padrão de 0 a esquerda
         }
 
         // adiciona a pessoa a lista
@@ -105,4 +105,7 @@ function addFila(objetoPessoa) {
         listaEspera.unshift(objetoPessoa);
     else
         listaEspera.push(objetoPessoa);
+
+    // exibe a ficha da pessoa na tela
+    alert("Ficha:\n" + objetoPessoa.ficha);
 }
