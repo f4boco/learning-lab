@@ -62,7 +62,7 @@ formulario.addEventListener("submit", function (e) {
             cpf: cpf,
             telefone: telefone,
             preferencial: isPreferencial,
-            ficha: ficha.toString().padStart(3, "0") // converte a ficha para string e coloca ficha com o padrão de 0 a esquerda
+            ficha: (isPreferencial == true ? "Pref-: " : "Norm-: ") + (ficha.toString().padStart(3, "0")) // converte a ficha para string e coloca ficha com o padrão de 0 a esquerda
         }
 
         // adiciona a pessoa a lista
@@ -105,10 +105,19 @@ function verificarFila(cpf) {
 // function que adiciona um objeto de pessoa ao vetor
 function addFila(objetoPessoa) {
     // verifica se a pessoa é preferencial
-    if (objetoPessoa.preferencial)
-        listaEspera.unshift(objetoPessoa);
-    else
-        listaEspera.push(objetoPessoa);
+    if (objetoPessoa.preferencial) {
+        // busca a posição da última pessoa preferencial
+        const ultimoPreferencial = listaEspera.findLastIndex(pessoa => pessoa.preferencial == true);
+
+        // verifica se o retorno da busca retornou -1 (Não encontrou nenhum preferencial)
+        if (ultimoPreferencial == -1) {
+            listaEspera.unshift(objetoPessoa); // adiciona a pessoa ao início da lista
+        } else {
+            listaEspera.splice(ultimoPreferencial + 1, 0, objetoPessoa);  // adiciona a pessoa após o último preferencial
+        }
+    } else {
+        listaEspera.push(objetoPessoa); // adiciona a pessoa ao final da lista
+    }
 
     // exibe a ficha da pessoa na tela
     alert("Ficha:\n" + objetoPessoa.ficha);
@@ -125,7 +134,7 @@ function exibirEspera() {
         // percorre o vetor
         for (const pessoa of listaEspera) {
             // concatena a ficha + nome e cpf com LGPD
-            lista += prepararLGPD(pessoa.nome, pessoa.cpf) + " - Ficha Nº: " + pessoa.ficha  + "\n";
+            lista += prepararLGPD(pessoa.nome, pessoa.cpf) + " - Ficha: " + pessoa.ficha  + "\n";
         }
     }
 
