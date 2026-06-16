@@ -3,8 +3,9 @@
  * autor: Fabiano O.
  */
 
-// cria um vetor de produtos gerado aleatoriamente
+// cria um vetor de produtos gerado aleatoriamente e chama a função de exibição
 const listaProdutos = gerarProdutos();
+exibirProdutos();
 
 // function geradora de produtos
 function gerarProdutos() {
@@ -49,4 +50,31 @@ function gerarProdutos() {
 function gerarNumeros(min, max) {
     const numeroGerado = Math.floor(Math.random() * (max - min + 1)) + min;
     return numeroGerado;
+}
+
+// function para exibir o vetor de produtos na tela
+function exibirProdutos(vetor = listaProdutos) {
+    // referencia o elemento htmlde saída
+    const outProdutos = document.getElementById("outProdutos");
+
+    // limpa o conteúdo do elemento
+    outProdutos.innerHTML = "";
+
+    // percorre o vetor
+    for (produto of vetor) {
+        // cria um elemento html para o produto
+        const cartaoProduto = document.createElement("div");
+
+        // adiciona a classe de estilização ao cartão
+        cartaoProduto.classList.add("cartao");
+
+        // adiciona o html que monta a estrutura de exibição do produto
+        cartaoProduto.innerHTML = `
+            <p>${produto.nome} - ${produto.preco}</p>
+            <small>${produto.categoria}</small>
+        `;
+
+        // coloca o elemento criado dentro do elemento de saída
+        outProdutos.appendChild(cartaoProduto);
+    }
 }
