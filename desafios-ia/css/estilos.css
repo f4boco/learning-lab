@@ -62,8 +62,19 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+}
+
+/* Layout com duas seções */
+.main-duplo {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Layout com uma única seção */
+.main-simples {
+    grid-template-columns: 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* ==========================
@@ -161,12 +172,24 @@ button:hover {
 }
 
 /* ==========================
+   FORMATAÇÕES ÚTILIZÁVEIS
+   (criação pessoal)
+========================== */
+.cartao {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+/* ==========================
    RESPONSIVIDADE
 ========================== */
 
 @media (max-width: 768px) {
 
-    main {
+    .main-duplo,
+    .main-simples {
         grid-template-columns: 1fr;
     }
 
