@@ -7,12 +7,21 @@
     <title>Chat Jogo</title>
 </head>
 <body>
-    <h1>Chat Jogo</h1>
-    <p>Chat: 
-        <input type="text" id="inMensagem" required autofocus>
-        <input type="button" id="btEnviar" value="Enviar">
-    </p>
-    <pre id="outChat"></pre>
-    <script src="js/exIA_1.js"></script>
+    <header class="cabecalho">
+        <h1>Chat Jogo</h1>
+        <small>Desafio 1 - IA</small>
+    </header>
+
+    <main class="main-simples">
+        <section class="secao-entradas">
+            <p>Chat: 
+                <input type="text" id="inMensagem" autofocus>
+                <input type="button" id="btEnviar" value="Enviar">
+            </p>
+            <hr style="margin-top: 10px; margin-bottom: 10px;">
+            <pre id="outChat"></pre>
+        </section>
+    </main>
+    <script src="js/desafio1.js"></script>
 </body>
 </html>
