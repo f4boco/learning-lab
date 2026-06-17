@@ -10,21 +10,11 @@ O botão Filtrar é clicado
 
 ## Fluxo
 
-1. Criar uma função `filtarProdutos(valorMinino = 0, categoria: todas)`;
-2. Criar um vetor `produtosFiltrados` para receber os elementos do vetor `listaProdutos` que atendem ao filtro.
-DECISÃO:
-3. Verificar se `categoria == "todas"`;
-SIM:
-4. Criar um laço para percorrer o vetor `listaProdutos` e verificar quais elementos o `preco >= valorMinimo`:
-    ```JavaScript
-    for (const produto of listaProdutos) {
-        if (produto.preco >= valorMinimo) 
-    }
-    ```
-5. Adiciona os elementos que atendem a verificação ao vetor `produtosFiltrados`;
-NÃO:
-
+1. Obeter os valores dos campos de entrada;
+2. Criar uma função `filtarProdutos()`;
+3. Criar um vetor `produtosFiltrados` para receber os elementos do vetor `listaProdutos` que atendem ao filtro, com o uso de *filter()*:
+5. Chamar a função `exibirProdutos` passando o vetor `produtosFiltrados` como parâmetro.
 
 ## Regras de Negócio
 
-* 
+* O valor mínimo deve ser >= 0 e deve ser um number

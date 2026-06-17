@@ -17,11 +17,26 @@
     <div class="conteiner-conteudo">
         <main class="main-simples">
             <section id="filtro">
-                Área de Filtro
+                <details>
+                    <summary>Filtrar</summary>
+                    <form id="formulario-filtro">
+                        <label for="inCategoria">Selecionar Categoria</label>
+                        <select name="categoria" id="inCategoria">
+                            <option value="todas" selected>Todas</option>
+                            <option value="Consumer Electronics">Consumer Electronics</option>
+                            <option value="Smart Home">Smart Home</option>
+                            <option value="Periféricos e Hardware de Computação">Periféricos e Hardware de Computação</option>
+                        </select>
+                        <label for="inValorMinimo">Valor Mínimo: </label>
+                        <input type="number" id="inValorMinimo" step="1.00" min="0">
+                        <button type="submit">Filtrar Produtos</button>
+                        <button type="button" id="btLimpar">CLS Filtro</button>
+                    </form>
+                </details>
             </section>
-             <section id="outProdutos" class="secao-entradas">
-                
-             </section>
+            <section id="outProdutos" class="secao-entradas">
+
+            </section>
         </main>
     </div>
 

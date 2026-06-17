@@ -7,6 +7,35 @@
 const listaProdutos = gerarProdutos();
 exibirProdutos();
 
+// referencia os elementos de entrada
+const formulario = document.getElementById("formulario-filtro");
+const inCategoria = document.getElementById("inCategoria");
+const inValorMinimo = document.getElementById("inValorMinimo");
+
+// adiciona o "ouvinte" de eventos ao formulario
+formulario.addEventListener("submit", function (e) {
+    // impeder que a página recarregue e o código js seja perdido
+    e.preventDefault();
+
+    // obtém os valoeres dos elementos de entrada
+    const categoria = inCategoria.value;
+    const valorMinimo = Number(inValorMinimo.value);
+
+    // chama a função exibirProdutos
+    exibirProdutos(filtrarProdutos(valorMinimo, categoria));
+})
+
+// function de limpar filtro
+function limparFiltros() {
+    // reseta o formulário 
+    formulario.reset();
+
+    // chama a funcção exibir produtos (sem parâmetros)
+    exibirProdutos();
+}
+// referencia o btLimpar e associa a função limparFiltros() ao evento click
+document.getElementById("btLimpar").addEventListener("click", limparFiltros);
+
 // function geradora de produtos
 function gerarProdutos() {
     const listaProdutosTemp = []; // receberá os objetos aleatórios
@@ -82,4 +111,29 @@ function exibirProdutos(vetor = listaProdutos) {
             outProdutos.appendChild(cartaoProduto);
         }
     }
+}
+
+// função que filtra produtos
+function filtrarProdutos(valorMinimo, categoria) {
+    // cria um vetor para receber os produtos filtrados
+    let produtosFiltrados = listaProdutos.filter(produto => {
+        // remove as strings do preco e tranforma em número
+        const precoProduto = Number(produto.preco.replace("R$: ", ""));
+
+        // verifica se o preco >= valorMinimo (true || false)
+        const passaPreco = precoProduto >= valorMinimo;
+
+        // verifica a categoria
+        const passaCategoria = categoria === "todas" || produto.categoria === categoria;
+        /**
+         * se o parâmetro categoria for "todas", todos os produtos verificados
+         * var ter essa varialvel como true. Logo todas as categorias entram.
+         */
+
+        // retorna true or false (true o produto passa no filtro, false não entra)
+        return passaPreco && passaCategoria;
+    });
+
+    // retorna o vetor com o filtro
+    return produtosFiltrados;
 }
