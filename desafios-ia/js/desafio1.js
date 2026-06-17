@@ -22,14 +22,27 @@ function sensurarChat() {
     }
 
     // chama a function de sensura
-    sensurarChat(mensagem, ["bobo", "feio", "chato"]);
+    modificarMensagem(mensagem, ["bobo", "feio", "chato"]);
 
     // exibe o conteúdo da variável chat no elemento de saída
     outChat.innerText = chat;
+
+    // limpa a entrada para próximas mensagens
+    inMensagem.value = "";
+    inMensagem.focus();
 }
+// referencia o btEnviar
+const btEnviar = document.getElementById("btEnviar");
+btEnviar.addEventListener("click", sensurarChat); // associa a function sensurarChat ao evento click do btEnviar
 
 // function para verificar a mensagem e sensurar
-function sensurarChat(mensagem, sensura) {
-    // prepara as palavras para expressão regular
-    const expressReg = sensura.join("|");
+function modificarMensagem(mensagem, sensura) {
+    // monta o padrão buscado pela expressão regular
+    const padrao = sensura.join("|");
+
+    // cria a expressão regular com o padrão buscado
+    const expressReg = new RegExp(padrao, "gi");
+
+    // concatena a o texto sensurado a variável chat
+    chat += mensagem.replace(expressReg, "****") + "\n";
 }

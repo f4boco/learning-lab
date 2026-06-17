@@ -14,7 +14,7 @@ o botão enviado é clicado
 2. Criar uma função `sensurarChat()`;
 2. Verificar se o usuário digitou alguma mensagem;
 3. Obter o conteúdo da mensagem;
-4. Criar uma função `verificarMesagem()` e passar como parâmetros a mensagem e um vetor com as palavras para sensurar;
+4. Criar uma função `modificarMensagem()` e passar como parâmetros a mensagem e um vetor com as palavras para sensurar;
     1. Com expressão regular e o método string de substituir texto, buscar as palavras no texto e sensurálas, se existir;
     2. Adicionar a mensagem sensurada a variável chat;
 

@@ -2,14 +2,20 @@
 
 Você deve criar um moderador de chat para um jogo. O programa recebe um texto digitado pelo usuário no HTML.
 
-Seu script deve usar uma Expressão Regular para identificar e substituir todas as ocorrências das palavras "bobo", "feio" e "chato" (independentemente de estarem em maiúsculas ou minúsculas) por asteriscos nas lestras do meio (exemplo: b**o).
+Seu script deve usar uma Expressão Regular para identificar e substituir todas as ocorrências das palavras "bobo", "feio" e "chato" (independentemente de estarem em maiúsculas ou minúsculas) por asteriscos (exemplo: ****).
 
 Resultado: Exiba a frase limpa e corrigida na tela.
 
 ---
 
 ## 🎯 Aprendizados
+- Strings e seus métodos;
+- RegEx;
+- funções;
+- vetores e suas funções;
 
+## Possíveis Melhorias
+[ ] Com o método search(), localizar o início das palavras e sensurar apenas as letras do meio.
 
 ---
 
