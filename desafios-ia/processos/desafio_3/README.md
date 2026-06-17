@@ -7,10 +7,17 @@ Resultado: Exiba a lista final filtrada na tela formatando a saída com Template
 ---
 
 ## 🎯 Aprendizados
+
 - Funções;
 - Vetores e Vetores de Objetos;
 - Math: random e floor;
 - laços de repetição (for e while);
+- Formumários e eventos;
+- Strings e métodos;
+- *filter()*.
+
+## Possíveis Melhorias
+[ ] Implementar o select categoria dinamicamente via JS
 
 ---
 
