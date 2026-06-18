@@ -5,14 +5,15 @@
  */
 
 function filtrarEmails() {
-    // referencia os elementos html de entrada
+    // referencia os elementos html de entrada e saída
     const inTexto = document.getElementById("inTexto");
+    const outLista = document.getElementById("outLista");
 
     // obtém o conteúdo da entrada e remove possíveis espaços a esquerda e a direita
     const texto = inTexto.value.trim();
 
     // cria a RegEx usada para validação, separação e filtro
-    const regExFilter = /[a-z], ?[a-z0-9]/i;
+    const regexFilter = /@[a-z]{2,}\.[a-z]{2,}(\.[a-z]{2,})?, ?/i;
 
     // verifica se a entrada é válida
     if (texto == "") { 
@@ -21,7 +22,36 @@ function filtrarEmails() {
         inTexto.focus();
         return;
     }
-    if (texto.match(regExFilter.test(texto))) {
-        
+    // verifica se existe ocorrências do padrão no texto (retorna true or false)
+    if (!regexFilter.test(texto)) {
+        alert("Erro!\nConfira a formatação do Texto...");
+        inTexto.focus();
+        return;
     }
+
+    // armazena o resultado do filtro por emials empresariais
+    const emailsEmpresariais = filtrarCorporativos(texto, new RegExp("@empresa.com.br", "i"));
+
+    // verifica se algum email passou no filtro
+    if (emailsEmpresariais.length == 0) {
+        outLista.innerText = "Nenhum e-mail da lista possui o domínio @empresa.com.br";
+    } else {
+        outLista.innerText = emailsEmpresariais.join(",");
+    }
+}
+// referencia o bt filtrar e associa a functio filtrarEmails ao evento click
+document.getElementById("btFiltrar").addEventListener("click", filtrarEmails);
+
+function filtrarCorporativos(texto, regex) {
+    // separa o texto em um vetor
+    const listaEmails = texto.split(",");
+
+    array.forEach(element => {
+        
+    });
+
+    // retorna um vetor com apenas o elementos que possum o "@empresa.com.br"
+    return listaEmails.filter(email => 
+        email.match(regex)
+    );
 }
