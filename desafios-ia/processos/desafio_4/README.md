@@ -8,7 +8,10 @@ Seu script deve analisar esse texto e extrair todos os códigos de rastreio que 
 ---
 
 ## 🎯 Aprendizados
-
+- String e Funções;
+- RegEx;
+- Funções;
+- Vetores;
 
 ---
 
