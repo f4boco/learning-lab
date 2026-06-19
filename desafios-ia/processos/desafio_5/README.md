@@ -7,7 +7,11 @@ Resultado: Exiba a lista de e-mails corporativos encontrados na tela.
 ---
 
 ## 🎯 Aprendizados
-
+- RegEx;
+- Strings e Métodos;
+- Vetores e métodos;
+- Funções;
+- Condicionais;
 
 ---
 

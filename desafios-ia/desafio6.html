@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Desafio 6</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <h1>Limpador de CPF/CNPJ</h1>
+        <small>Desafio 006 - IA</small>
+    </header>
+
+    <div class="conteiner-conteudo">
+        <main class="main-duplo">
+            <section class="secao-entradas">
+                <h2>[Entradas]</h2>
+                <label for="inDocumento">Nº do Documento: </label>
+                <input type="text" id="inDocumento" placeholder="ex: 000.111.222-33 ou 00.111.222/0001-33" required autofocus>
+                <button type="button" id="btLimpar">Limpar Doc</button>
+            </section>
+            
+            <section class="secao-saida">
+                <h2>[Saída] - Documento Formatado</h2>
+                <p id="outResultado"></p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="rodape">
+        <p>by Fabiano O.</p>
+        <small>&copy; 2026</small>
+    </footer>
+
+    <script src="js/desafio6.js"></script>
+</body>
+</html>
