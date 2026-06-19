@@ -46,10 +46,6 @@ function filtrarCorporativos(texto, regex) {
     // separa o texto em um vetor
     const listaEmails = texto.split(",");
 
-    array.forEach(element => {
-        
-    });
-
     // retorna um vetor com apenas o elementos que possum o "@empresa.com.br"
     return listaEmails.filter(email => 
         email.match(regex)
