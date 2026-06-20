@@ -28,10 +28,10 @@ formulario.addEventListener("submit", function (e) {
     const hashtags = buscarPadrao(texto, "#[^\\s]+");
 
     // verifica se alguma hashtag foi localizada na publicação
-    if (hashtags.length == 0) {
-        outResultado.innerText = "Não há Hashtags na Publicação.";
-    } else {
+    if (hashtags) {
         outResultado.innerText = hashtags.join(", ");
+    } else {
+        outResultado.innerText = "Não há Hashtags na Publicação.";
     }
 });
 
