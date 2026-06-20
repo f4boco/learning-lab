@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Desadio 7</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <h1>Buscador de Hashtags</h1>
+        <small>Desafio 007 - IA</small>
+    </header>
+
+    <div class="conteiner-conteudo">
+        <main class="main-simples">
+            <section class="secao-entradas">
+                <h2>[Entradas]</h2>
+                <form id="formulario-publicacao">
+                    <label for="inPublicacao">Texto da Publicação:</label>
+                    <textarea id="inPublicacao" placeholder="O que falar hoje?" required autofocus></textarea>
+                    <button type="submit" id="btExtrair">Extrair #s</button>
+                </form>
+
+                <h2 style="margin: 20px 0;">[Saídas]</h2>
+                <p id="outResultado"></p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="rodape">
+        <p>by Fabiano O.</p>
+        <small>&copy; 2026</small>
+    </footer>
+
+    <script src="js/desafio7.js"></script>
+</body>
+</html>
