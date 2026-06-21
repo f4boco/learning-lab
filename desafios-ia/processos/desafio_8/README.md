@@ -11,7 +11,11 @@ Resultado: Exiba "Senha Forte" se passar nos testes, ou "Senha Insegura" caso fa
 ---
 
 ## 🎯 Aprendizados Praticados
-
+- Strings e funções strings;
+- RegEx e métodos regex.text();
+- Condicionais;
+- Vetor de Objetos;
+- Laço de repetição;
 
 ---
 

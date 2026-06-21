@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Desafio 9</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <h1>O Otimizador de Links</h1>
+        <small>Desafio 009 - IA</small>
+    </header>
+
+    <div class="conteiner-conteudo">
+        <main class="main-duplo">
+            <section class="secao-entradas">
+                <h2>[Entrada] - Link Completo</h2>
+
+                <form id="formulario-link">
+                    <label for="inLink">Cole o Link:</label>
+                    <input type="text" id="inLink" placeholder="ex.: https://www.google.com" required autofocus>
+                    <button type="submit" id="btRemover">Remover Protocolo</button>
+                </form>
+            </section>
+
+            <section class="secao-saida">
+                <h2>[Saída] - Link Sem Protocolo</h2>
+                
+                <pre id="outResultado"></pre>
+            </section>
+        </main>
+    </div>
+
+    <footer class="rodape">
+        <p>by Fabiano O.</p>
+        <small>&copy; 2026</small>
+    </footer>
+
+    <script src="js/desafio9.js"></script>
+</body>
+</html>
