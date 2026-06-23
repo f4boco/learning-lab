@@ -7,7 +7,13 @@ Resultado: Exiba o número total de ocorrências encontradas.
 ---
 
 ## 🎯 Aprendizados Praticados
-
+- Manipulação de Formulários;
+- RegEx e função regex.text();
+- String e funções;
+- Operador Ternário;
+- Funções;
+- Vetores;
+- Condicionais.
 
 ---
 
