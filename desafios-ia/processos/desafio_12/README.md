@@ -6,7 +6,10 @@ Seu script deve gerar uma nova lista contendo essas palavras no singular, sem a 
 ---
 
 ## 🎯 Aprendizados Praticados
--
+- Vetores e métodos;
+- for...of;
+- String, Método replace() e regEx;
+- funções;
 
 ---
 
