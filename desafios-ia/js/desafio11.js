@@ -42,23 +42,19 @@ formulario.addEventListener("submit", function (e) {
 function contarPalavras(texto, palavra) {
     // escapa possíveis caracteres especiais de RegEx
     const palavraEscapada = palavra.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    /** 
-     * essa linha busca todos os caracteres especiais de regex, adiciona uma \ antes dele;
-     * $& representa o próprio texto encontrado.
-     */
 
-    // verifica se a palavra é um " " ou um símbolo
+    // verifica se a palavra é um " " ou algo que não seja uma letra ou nº
     const isEspecial = palavra.trim() === "" || !/[a-z0-9]/i.test(palavra);
 
     // cria a RegEx com a palavra a ser buscada
     const regexPalavra = new RegExp(isEspecial
         ? `${palavraEscapada}`
-        : `\\b${palavraEscapada}\\b`, "gi"
+        : `(?<=\\s|\\p{P}|^)${palavraEscapada}(?=\\s|\\p{P}|$)`, "giu" 
+        /**
+         * para isEspecial == false, eu defino o que deve estar antes e depois da palavra
+         * (?<=\\s|\\p{P}|^) e (?=\\s|\\p{P}|$)
+         */
     );
-    /**
-     * Minha Lógica para decidir a regex é: Se tiver apenas um caractere (" " ou símbolos) não usa
-     * a fronteira de caractere (\b), mas se for uma palavra (+ de um caractere), usa.
-     */
 
     // busca as correspondências no texto
     const resultadoBusca = texto.match(regexPalavra);
