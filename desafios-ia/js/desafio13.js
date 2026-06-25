@@ -27,19 +27,14 @@ formulario.addEventListener("submit", function (e) {
     // busca valores monetarios no texto
     const valoresMonetarios = buscarMonetarios(texto);
 
-    // verifica se existe ocorrências de valores monetários no texto e exibe o resultado no html
-    if (valoresMonetarios.length == 0) {
-        outResultado.innerText = "Não há valores Monetários no Texto";
-    } else {
-        outResultado.innerText = "No texto, há o(s) seguinte(s) valor(es) monetário(s):\n" + 
-            valoresMonetarios.join(", ");
-    }
+    // chama a função para exibir o resultado
+    exibirBusca(valoresMonetarios);
 });
 
-// function que busca valores monetários
+// função que busca valores monetários
 function buscarMonetarios(texto) {
     // cria a regex que busca os padrões monetários
-    const regexMonetario = /(?<=R\$|R\$ )(\p{Decimal_Number}+)/gu;
+    const regexMonetario = /(?<=R\$\s{0,1})\d+([.,]\d{2})?/g;
 
     // busca as ocorrências da regex na string texto
     const valoresMonetarios = texto.match(regexMonetario);
@@ -50,4 +45,19 @@ function buscarMonetarios(texto) {
      * se não: vetor valoresMonetarios
      */
     return !valoresMonetarios ? [] : valoresMonetarios;
+}
+
+// função para exibir resultado da busca
+function exibirBusca(vetorBuscado) {
+    // verifica se existem valores no vetor
+    if (vetorBuscado.length == 0) {
+        outResultado.innerText = "Não há valores Monetários no Texto";
+    } else {
+        // transforma os valores do vetorBuscado em Valores R$
+        const vetorTransformadoMoney = vetorBuscado.map(valor => "R$ " + valor);
+
+        // exibe os valores transformados
+        outResultado.innerText = "No texto, há o(s) seguinte(s) valor(es) monetário(s):\n" + 
+            vetorTransformadoMoney.join(";\n");
+    }
 }

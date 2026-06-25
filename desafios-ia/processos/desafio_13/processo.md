@@ -32,17 +32,18 @@ O botão `Exibir Valores Monetários` é clicado
     return um vetor vazio;
 
     NÃO:
-    5.3 Adicionar R$ antes de cada `valorMonetario`;
-    5.4 Retornar o `valoresMonetários`;
+    5.3 Retornar o `valoresMonetários`;
 
 6. receber em `valoresMonetarios` o retorno de `buscarMonetario()`;
+7. Criar uma função `exibirBusca(vetorBusca)`
+    DECISÃO:
+    Verificar se `valoresMonetarios` é um vetor vazio;
 
-DECISÃO:
-Verificar se `valoresMonetarios` é um vetor vazio;
+    SIM:
+    Exibir no HTML: "Não há valores Monetários no texto;
 
-SIM:
-Exibir no HTML: "Não há valores Monetários no texto;
+    NÃO:
+    7.1 Adicionar R$ antes de cada `valorMonetario`;
+    7.2 Exibir os valores de`valoresMonetarios`;
 
-NÃO:
-7. Exibir os valores de`valoresMonetarios`;
-
+8. Chamar a função `exibirBusca()` passando o `valoresMonetarios` como parâmetro;

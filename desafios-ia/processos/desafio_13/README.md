@@ -7,7 +7,11 @@ Resultado: Exiba os valores financeiros encontrados na tela.
 ---
 
 ## 🎯 Aprendizados Praticados
-- 
+- Condicionais;
+- Vetores e metodos de vetores;
+- RegEx;
+- String e Métodos Strings;
+- Funções.
 
 ---
 
