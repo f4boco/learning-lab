@@ -7,10 +7,13 @@
  * autor: Fabiano O.
  */
 
+// referencia os elementos html
+const outProdutos = document.getElementById("outProdutos");
+
 // gera uma lista de produtos com um nº aleatório (entre 5 e 10) de produtos aleatórios
 const listaProdutos = gerarProdutos(gerarNum(5, 10));
 const listaProdutosReal = converterReal(listaProdutos);
-console.log(listaProdutosReal);
+exibirProdutos(listaProdutosReal); // chamada a função que exibe os produtos
 
 // gera um nº aleatório com intervalo definido
 function gerarNum(min, max) {
@@ -86,10 +89,39 @@ function converterReal(lista) {
             id: element.id,
             nome: element.nome,
             precoDolar: element.precoDolar,
-            precoReal: (element.precoDolar.replace("$ ", "") * 5.5).toFixed(2)
+            precoReal: "R$ " + (element.precoDolar.replace("$ ", "") * 5.5).toFixed(2)
         }
         listaConvertida.push(produtoConvertido);
     });
 
     return listaConvertida;
+}
+
+// função que exibe os produtos na tela
+function exibirProdutos(lista) {
+    // limpa o html de outProdutos
+    outProdutos.innerHTML = "";
+
+    // verifica a lista está vazia
+    if (lista.length === 0) {
+        outProdutos.innerHTML = `<p>Nenhum produto para ser Exibido</p>`;
+    } else {
+        // para cada elemento da lista...
+        lista.forEach(element => {
+            // cria um novo elemento html objeto para o elemento
+            const cartaoProduto = document.createElement("div");
+
+            // adiciona a classe de estilização ao elemento html
+            cartaoProduto.className = "cartao";
+
+            // cria o elemento que monta a estrutura do elemento
+            cartaoProduto.innerHTML = `
+            <p>${element.nome}</p>
+            <small><strong>${element.precoDolar}</strong> (${element.precoReal})</small>
+            `;
+
+            // adiciona o elemento criado dentro de outResultado
+            outProdutos.appendChild(cartaoProduto);
+        });
+    }
 }
