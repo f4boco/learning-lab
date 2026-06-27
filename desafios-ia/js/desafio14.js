@@ -7,6 +7,9 @@
  * autor: Fabiano O.
  */
 
+// gera uma lista de produtos com um nº aleatório (entre 5 e 10) de produtos aleatórios
+const listaProdutos = gerarProdutos(gerarNum(5, 10));
+
 // gera um nº aleatório com intervalo definido
 function gerarNum(min, max) {
     let numGerado; // recebe o nº gerado;
@@ -17,10 +20,26 @@ function gerarNum(min, max) {
         numGerado = Math.floor(Math.random() * (max - min + 1)) + min;
     } else {
         // gera um nº float
-        numGerado = (Math.random() * (max - min)) + min;
+        numGerado = ((Math.random() * (max - min)) + min).toFixed(2);
     }
     
     return numGerado;
+}
+
+// função que gera um id único
+function gerarId() {
+    // define as letras para usar na composição do id
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const indexAleatorio = gerarNum(0, letras.length - 1); // define um nº para um index aleatório
+
+    // gera um nº "único" com base no tempo atual
+    let nTempo = Date.now();
+    // adiciona e subtrai nºs aleátorios para evitar IDs iguais em loops
+    nTempo = nTempo + gerarNum(1000, 2000) - gerarNum(100, 500);
+
+    // gera o id concatenando o nº + uma letra aleatória
+    const idGerado = nTempo + letras.charAt(indexAleatorio);
+    return idGerado;
 }
 
 // função que cria um vetor de produtos aleatórios
@@ -37,6 +56,19 @@ function gerarProdutos(qtdProdutos) {
 
     // repete qtdVezes para gerar qtdProdutos
     for (let i = 0; i < qtdProdutos; i++) {
+        // define aleatorimente um nome (index de nomesAleatórios)
+        const indexAleatorio = gerarNum(0, nomesAleatorios.length - 1);
 
+        // cria um novo objeto de produto
+        const produtoObjeto = {
+            id: "Prod-" + gerarId(),
+            nome: nomesAleatorios[indexAleatorio],
+            precoDolar: "$ " + gerarNum(1.99, 9.99)
+        }
+
+        // adiciona o produto gerado ao final da lista local
+        listaProdutosGerados.push(produtoObjeto);
     }
+
+    return listaProdutosGerados;
 }
