@@ -182,6 +182,18 @@ button:hover {
     border-radius: 8px;
 }
 
+/* Exibição em grade */
+.grade-cartoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* Remove a margem inferior quando estiver em grade */
+.grade-cartoes .cartao {
+    margin-bottom: 0;
+}
+
 /* ==========================
    RESPONSIVIDADE
 ========================== */
