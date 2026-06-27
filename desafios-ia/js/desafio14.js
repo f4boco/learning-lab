@@ -9,6 +9,8 @@
 
 // gera uma lista de produtos com um nº aleatório (entre 5 e 10) de produtos aleatórios
 const listaProdutos = gerarProdutos(gerarNum(5, 10));
+const listaProdutosReal = converterReal(listaProdutos);
+console.log(listaProdutosReal);
 
 // gera um nº aleatório com intervalo definido
 function gerarNum(min, max) {
@@ -71,4 +73,23 @@ function gerarProdutos(qtdProdutos) {
     }
 
     return listaProdutosGerados;
+}
+
+// função que converte os preços de dolar para real
+function converterReal(lista) {
+    const listaConvertida = []; // recebe os novos objetos com o valore R$
+
+    // para cada elemento de lista
+    lista.forEach(element => {
+        // cria um novo obeto
+        const produtoConvertido = {
+            id: element.id,
+            nome: element.nome,
+            precoDolar: element.precoDolar,
+            precoReal: (element.precoDolar.replace("$ ", "") * 5.5).toFixed(2)
+        }
+        listaConvertida.push(produtoConvertido);
+    });
+
+    return listaConvertida;
 }
