@@ -14,6 +14,20 @@
     
     <div class="conteiner-conteudo">
         <main class="main-simples">
+            <section class="secao-filtros">
+                <details>
+                    <summary><strong>Filtro</strong></summary>
+                    <form>
+                        <label for="inValorMinimo">Valor Mínimo</label>
+                        <input type="number" id="inValorMinimo" step="0.01" min="0" autofocus>
+                        <label for="inValorMax">Valor Máximo</label>
+                        <input type="number" id="inValorMax" step="0.01" min="0">
+                        <button type="submit">Filtrar</button>
+                        <button type="button">Limpar Filtro</button>
+                    </form>
+                </details>
+            </section>
+
             <section class="secao-saida">
                 <h2>[Saída] - Produtos com Valores Convertidos</h2>
                 <p>A conversão considera um câmbio de R$ 5,50 por dolar</p>
