@@ -8,12 +8,41 @@
  */
 
 // referencia os elementos html
+const formulario = document.getElementById("formulario-filtro");
+const inValorMin = document.getElementById("inValorMin");
+const inValorMax = document.getElementById("inValorMax");
 const outProdutos = document.getElementById("outProdutos");
 
 // gera uma lista de produtos com um nº aleatório (entre 5 e 10) de produtos aleatórios
 const listaProdutos = gerarProdutos(gerarNum(5, 10));
 const listaProdutosReal = converterReal(listaProdutos);
 exibirProdutos(listaProdutosReal); // chamada a função que exibe os produtos
+
+formulario.addEventListener("submit", function (e) {
+    // impede que a página recarrege e reinicie o código js
+    e.preventDefault();
+
+    // obtém os valores das entradas do filtro
+    const valorMin = Number(inValorMin.value);
+    let valorMax = Number(inValorMax.value);
+
+    // verifica se as entradas são válidas para o filtro
+    if (isNaN(valorMin) || isNaN(valorMax)) {
+        alert("Valores de Filtro Inválidos");
+        inValorMin.focus();
+        return;
+    } else if (valorMax < valorMin) {
+        // verifica se cada elemento da lista é >= valorMax
+        listaProdutosReal.forEach(element => {
+           const preco = removerMoeda(element.precoDolar, "$");
+           if (preco >= valorMax) {
+            valorMax = preco; // O maior preco define o valorMax
+           }
+        });
+    }
+    // chama a função de filtrar produtos passando o intervalo como parâmetros
+    filtrarProdutos(valorMin, valorMax);
+});
 
 // gera um nº aleatório com intervalo definido
 function gerarNum(min, max) {
@@ -125,3 +154,38 @@ function exibirProdutos(lista) {
         });
     }
 }
+
+// função que filtra o vetor
+function filtrarProdutos(min, max) {
+    // cria um novo vetor com os produtos filtrados
+    const listaFiltrada = listaProdutosReal.filter(produto => {
+        // tranforma o valor do produto em number
+        const preco = removerMoeda(produto.precoDolar, "$");
+
+        // verifica se o preco esta no limite do filtro
+        const isMin = preco >= min;
+        const isMax = preco <= max;
+
+        // retorna true para o produto que é >= min E <= max
+        return isMin && isMax;
+    });
+    // chama a função de exibir passando o vetor filtrado como parâmetro
+    exibirProdutos(listaFiltrada);
+}
+
+// função que remove o marcador de moeda
+function removerMoeda(valor, moeda) {
+    // retorna o numero removido o símbolo da moeda
+    return Number(valor.replace(`${moeda} `, ""));
+}
+
+// função que limpa o filtro
+function limparFiltro() {
+    // chama a função de exibir passando o vetor completo como parâmtro;
+    exibirProdutos(listaProdutosReal);
+
+    // recarrega o formulário
+    formulario.reset();
+}
+// associa a função limparFiltro ao evento click do btLimpar
+document.getElementById("btLimpar").addEventListener("click", limparFiltro);
