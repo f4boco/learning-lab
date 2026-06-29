@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Ex6.8</title>
+</head>
+<body>
+    <div class="conteiner">
+        <header class="cabecalho">
+            <h1>Programa Data e Hora Atual</h1>
+        </header>
+
+        <script>
+            // cria um objeto com a data atual
+            const hoje = new Date();
+            const data = hoje.toDateString(); // Obtém apenas a data
+            const hora = hoje.toTimeString(); // Obtém apenas a hora
+
+            // exibe a data e a hora
+            alert(`Data: ${data}\nHora: ${hora}`);
+        </script>
+    </div>
+</body>
+</html>

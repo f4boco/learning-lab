@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Ex6.9</title>
+</head>
+<body>
+    <div class="conteiner">
+        <header class="cabecalho">
+            <h1>Programa Ano de Nascimento</h1>
+        </header>
+
+        <script>
+            // obtém o ano atual
+            const anoAtual = new Date().getFullYear();
+            // solicita a idade do usuário
+            const idade = prompt("Quantos anos você comemora em " + anoAtual + "?");
+
+            // calcula e exibe o ano de nascimento
+            const anoNascimento = anoAtual - idade;
+            alert("Ah... então você nasceu em " + anoNascimento);
+        </script>
+    </div>
+</body>
+</html>

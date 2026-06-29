@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Ex6.7</title>
+</head>
+<body>
+    <div class="conteiner">
+        <header class="cabecalho">
+            <h1>Programa Data</h1>
+        </header>
+
+        <script>
+            // cria dois objetos com a data atual
+            const hoje = new Date();
+            const amanha = new Date();
+
+            // captura o dia (hoje) do objeto amanha
+            const dia = amanha.getDate();
+            amanha.setDate(dia + 1); // altera o dia do objeto amanha (passando hoje + 1 = amanha)
+            
+            // exibe as duas datas completas. Hoje e Amanhã.
+            alert(`Hoje: ${hoje} \nAmanhã: ${amanha}`);
+        </script>
+    </div>
+</body>
+</html>
