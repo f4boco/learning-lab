@@ -27,18 +27,19 @@ formulario.addEventListener("submit", function (e) {
     let valorMax = Number(inValorMax.value);
 
     // verifica se as entradas são válidas para o filtro
-    if (isNaN(valorMin) || isNaN(valorMax)) {
+    if (valorMin === 0 && valorMax === 0) {
+        inValorMin.value = "";
+        inValorMax.value = "";
+        inValorMin.focus();
+        return;
+    } else if (isNaN(valorMin) || isNaN(valorMax)) {
         alert("Valores de Filtro Inválidos");
         inValorMin.focus();
         return;
     } else if (valorMax < valorMin) {
-        // verifica se cada elemento da lista é >= valorMax
-        listaProdutosReal.forEach(element => {
-           const preco = removerMoeda(element.precoDolar, "$");
-           if (preco >= valorMax) {
-            valorMax = preco; // O maior preco define o valorMax
-           }
-        });
+        // extrai os preços dos prdutos e define o maior preço como valorMax
+        const precos = listaProdutos.map(produto => produto.precoDolar);
+        valorMax = Math.max(...precos);
     }
     // chama a função de filtrar produtos passando o intervalo como parâmetros
     filtrarProdutos(valorMin, valorMax);
@@ -54,7 +55,7 @@ function gerarNum(min, max) {
         numGerado = Math.floor(Math.random() * (max - min + 1)) + min;
     } else {
         // gera um nº float
-        numGerado = ((Math.random() * (max - min)) + min).toFixed(2);
+        numGerado = Number(((Math.random() * (max - min)) + min).toFixed(2));
     }
     
     return numGerado;
@@ -97,7 +98,7 @@ function gerarProdutos(qtdProdutos) {
         const produtoObjeto = {
             id: "Prod-" + gerarId(),
             nome: nomesAleatorios[indexAleatorio],
-            precoDolar: "$ " + gerarNum(1.99, 9.99)
+            precoDolar: gerarNum(1.99, 9.99)
         }
 
         // adiciona o produto gerado ao final da lista local
@@ -109,21 +110,11 @@ function gerarProdutos(qtdProdutos) {
 
 // função que converte os preços de dolar para real
 function converterReal(lista) {
-    const listaConvertida = []; // recebe os novos objetos com o valore R$
-
-    // para cada elemento de lista
-    lista.forEach(element => {
-        // cria um novo obeto
-        const produtoConvertido = {
-            id: element.id,
-            nome: element.nome,
-            precoDolar: element.precoDolar,
-            precoReal: "R$ " + (element.precoDolar.replace("$ ", "") * 5.5).toFixed(2)
-        }
-        listaConvertida.push(produtoConvertido);
-    });
-
-    return listaConvertida;
+    // retorna um novo vetor contendo objeto com...
+    return listaProdutos.map(produto => ({
+        ...produto, // cópia de todas as propriedades do objeto do vetor listaProdutos
+        precoReal: Number((produto.precoDolar * 5.5).toFixed(2)) // adicionada a nova propriedade
+    }));
 }
 
 // função que exibe os produtos na tela
@@ -145,8 +136,8 @@ function exibirProdutos(lista) {
 
             // cria o elemento que monta a estrutura do elemento
             cartaoProduto.innerHTML = `
-            <p>${element.nome}</p>
-            <small><strong>${element.precoDolar}</strong> (${element.precoReal})</small>
+            <p>${element.nome} (${element.id.replace("Prod-", "")})</p>
+            <small><strong>$ ${element.precoDolar}</strong> (R$ ${element.precoReal})</small>
             `;
 
             // adiciona o elemento criado dentro de outResultado
@@ -159,24 +150,15 @@ function exibirProdutos(lista) {
 function filtrarProdutos(min, max) {
     // cria um novo vetor com os produtos filtrados
     const listaFiltrada = listaProdutosReal.filter(produto => {
-        // tranforma o valor do produto em number
-        const preco = removerMoeda(produto.precoDolar, "$");
-
         // verifica se o preco esta no limite do filtro
-        const isMin = preco >= min;
-        const isMax = preco <= max;
+        const isMin = produto.precoDolar >= min;
+        const isMax = produto.precoDolar <= max;
 
         // retorna true para o produto que é >= min E <= max
         return isMin && isMax;
     });
     // chama a função de exibir passando o vetor filtrado como parâmetro
     exibirProdutos(listaFiltrada);
-}
-
-// função que remove o marcador de moeda
-function removerMoeda(valor, moeda) {
-    // retorna o numero removido o símbolo da moeda
-    return Number(valor.replace(`${moeda} `, ""));
 }
 
 // função que limpa o filtro

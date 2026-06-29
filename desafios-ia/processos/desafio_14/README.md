@@ -7,7 +7,13 @@ Resultado: Exiba a nova lista de objetos formatada no HTML.
 ---
 
 ## 🎯 Aprendizados Praticados
-- 
+- Formulários;
+- Funções;
+- Vetores, vetores de Objetos e vetor.methods;
+- Math;
+- Condicionais;
+- for e forEach;
+- Strings e Strings.Methods;
 
 ---
 
