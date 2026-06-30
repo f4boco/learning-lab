@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Ex6.12</title>
+</head>
+<body>
+    <script>
+        let parcelas = Number(prompt("Quantas Parcelas? "));
+
+        let lista = ""; // irá acumular as parcelas
+        let dia, mes, ano, diaZero, mesZero;
+
+        const data = new Date(); // data atual
+
+        for (let i = 1; i <= parcelas; i++) {
+            data.setMonth(data.getMonth() + 1); // aumenta um mês na data
+            dia = data.getDate();
+            mes = data.getMonth() + 1; // mês varia de 0 a 11, por isso, +1
+            ano = data.getFullYear();
+
+            // concatena as parcelas na variavel lista, com uma quebra de linha no final
+            lista += `${i}ª Parcela: ${dia.toString().padStart(2, "0")}/${mes.toString().padStart(2,"0")}/${ano}\n`;
+        }
+        alert(lista); // exibe as parcelas
+    </script>
+</body>
+</html>

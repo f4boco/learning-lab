@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Ex6.11</title>
+</head>
+<body>
+    <script>
+        // cria um objeto date (instancia de data)
+        const hoje = new Date();
+
+        // captura, separadamente, dia, mes e ano
+        const dia = hoje.getDate();
+        const mes = hoje.getMonth() + 1; // adiciona 1, pois os meses começam em 0
+        const ano = hoje.getFullYear();
+
+        // Converte o mês para string e adiciona o 0 a esquerda.
+        alert(`Hoje\nData: ${dia} / ${mes.toString().padStart(2, "0")} / ${ano}`);
+    </script>
+</body>
+</html>
