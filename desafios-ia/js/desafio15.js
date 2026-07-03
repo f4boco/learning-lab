@@ -68,3 +68,14 @@ function gerarProdutos(qtdProdutos) {
 
     return produtosGerados;
 }
+
+// função que filtra os produtos vencidos
+function filtrarVencidos(lista) {
+    // cria um objeto com a data atual para comparação
+    const dataHoje = new Date();
+
+    // filtra os produtos com a data anterior a hoje e retona um vetor com eles
+    return lista.filter(produto =>
+        produto.dataVenc < dataHoje
+    );
+}
