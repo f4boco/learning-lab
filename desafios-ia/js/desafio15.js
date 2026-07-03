@@ -14,7 +14,7 @@ function gerNum(min, max) {
     if (Number.isInteger(min) && Number.isInteger(max)) {
         numGerado = Math.floor(Math.random() * (max - min + 1)) + min;
     } else {
-        numGerado = Math.random() * (max - min + 1) + min;
+        numGerado = Math.random() * (max - min) + min;
     }
     
     return Number(numGerado.toFixed(2));
