@@ -4,7 +4,7 @@
  * autor: Fabiano O.
  */
 
-const listaProdutos; // recebe o vetor de produtos aleatórios
+const listaProdutos = gerarProdutos(gerNum(10, 20)); // recebe o vetor de produtos aleatórios
 
 // função que gera numeros aleatórios em um intervalo definido
 function gerNum(min, max) {
@@ -17,7 +17,18 @@ function gerNum(min, max) {
         numGerado = Math.random() * (max - min + 1) + min;
     }
     
-    return Number(numGerado.tofixed(2));
+    return Number(numGerado.toFixed(2));
+}
+
+// função que gera um id único
+function gerarId() {
+    // captura o número de milissegundos do tempo atual
+    const tempoAtual = Date.now();
+    // gera uma letra aleatória (A-Z)
+    const letraAleatoria = String.fromCharCode(gerNum(0, 25) + 65);
+    
+    // retorna um id no padrão num + letra + TempoAtual
+    return gerNum(1000, 2000) + letraAleatoria + tempoAtual;
 }
 
 // função que gera um vetor de produtos aleatoriamente
@@ -36,13 +47,24 @@ function gerarProdutos(qtdProdutos) {
     for (let i = 0; i < qtdProdutos; i++) {
         // pega um index aleatório do vetor produtos aleatórios para ser o nome do Produto
         const nomeProduto = produtosAleatorios[gerNum(0, produtosAleatorios.length - 1)];
-        const preco = gerNum(0.90, 10); // define um preço aleatório
+        const precoProduto = gerNum(0.90, 10); // define um preço aleatório
 
         // manipula a data de validade
         datasProd.setDate(gerNum(1, 31)); // deifine um dia aleatorio
-        datasProd.setMonth(0, 11); // define um mês aleatório
+        datasProd.setMonth(gerNum(0, 11)); // define um mês aleatório
         datasProd.setFullYear(gerNum(anoAtual, anoAtual + 1)); // define o ano de validade
 
-        
+        // cria um novo objeto com produtos
+        const produto = {
+            id: gerarId(),
+            nome: nomeProduto,
+            preco: precoProduto,
+            dataVenc: datasProd.toLocaleDateString("pt-BR")
+        }
+
+        // adiciona o objeto do produto ao final do vetor produtosGerados
+        produtosGerados.push(produto);        
     }
+
+    return produtosGerados;
 }
