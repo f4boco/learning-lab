@@ -39,27 +39,33 @@ function gerarProdutos(qtdProdutos) {
         "Farinha de Trigo 1kg", "Biscoito Recheado 140g", "Sabão em Pó 800g", "Detergente Líquido 500ml",
         "Papel Higiênico 12 rolos", "Margarina 500g", "Molho de Tomate 340g", "Achocolatado em Pó 400g"];
     const produtosGerados = []; // armazena os produtos gerados
+
+    // descobre o ano atual
+    const anoAtual = new Date().getFullYear();
     
     // cria um loop para repetit qtdProdutos e gerar qtdProdutos produtos
     for (let i = 0; i < qtdProdutos; i++) {
-        const datasProd = new Date(); // para manipular as datas de vencimento
-        const anoAtual = datasProd.getFullYear(); // descobre o ano atual
-
         // pega um index aleatório do vetor produtos aleatórios para ser o nome do Produto
         const nomeProduto = produtosAleatorios[gerNum(0, produtosAleatorios.length - 1)];
         const precoProduto = gerNum(0.90, 10); // define um preço aleatório
 
-        // manipula a data de validade
-        datasProd.setDate(gerNum(1, 31)); // deifine um dia aleatorio
-        datasProd.setMonth(gerNum(0, 11)); // define um mês aleatório
-        datasProd.setFullYear(gerNum(anoAtual, anoAtual + 1)); // define o ano de validade
+        // gera nºs aleatórios para defini o dia, mes e ano
+        const dia = gerNum(1, 31);
+        const mes = gerNum(0, 11);
+        const ano = gerNum(anoAtual, anoAtual + 1);
+
+        // cria uma data de vencimento para o produto
+        const dataVenc = new Date(ano, mes, dia);
+        /**
+         * O objeto é criado com a data definida e a hora 00:00:00
+         */
 
         // cria um novo objeto com produtos
         const produto = {
             id: gerarId(),
             nome: nomeProduto,
             preco: precoProduto,
-            dataVenc: datasProd
+            dataVenc: dataVenc
         }
 
         // adiciona o objeto do produto ao final do vetor produtosGerados
@@ -73,6 +79,8 @@ function gerarProdutos(qtdProdutos) {
 function filtrarVencidos(lista) {
     // cria um objeto com a data atual para comparação
     const dataHoje = new Date();
+    // zera a hora para comparar a data
+    dataHoje.setHours(0, 0, 0, 0);
 
     // filtra os produtos com a data anterior a hoje e retona um vetor com eles
     return lista.filter(produto =>
