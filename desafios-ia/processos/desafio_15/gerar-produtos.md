@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Criar um vetor com objetos com x produtos de supermercado. Cada objeto possui as propriedades id (string), nome (string), preco (número) e dataVenc (data).
+Criar um vetor de objetos com x produtos de supermercado. Cada objeto possui as propriedades id (string), nome (string), preco (número) e dataVenc (data).
 
 ## Início
 

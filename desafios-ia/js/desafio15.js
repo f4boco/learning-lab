@@ -38,13 +38,13 @@ function gerarProdutos(qtdProdutos) {
         "Leite Integral 1L", "Café Solúvel 200g", "Açúcar Refinado 1kg", "Óleo de Soja 900ml",
         "Farinha de Trigo 1kg", "Biscoito Recheado 140g", "Sabão em Pó 800g", "Detergente Líquido 500ml",
         "Papel Higiênico 12 rolos", "Margarina 500g", "Molho de Tomate 340g", "Achocolatado em Pó 400g"];
-    
     const produtosGerados = []; // armazena os produtos gerados
-    const datasProd = new Date(); // para manipular as datas de vencimento
-    const anoAtual = datasProd.getFullYear(); // descobre o ano atual
-
+    
     // cria um loop para repetit qtdProdutos e gerar qtdProdutos produtos
     for (let i = 0; i < qtdProdutos; i++) {
+        const datasProd = new Date(); // para manipular as datas de vencimento
+        const anoAtual = datasProd.getFullYear(); // descobre o ano atual
+
         // pega um index aleatório do vetor produtos aleatórios para ser o nome do Produto
         const nomeProduto = produtosAleatorios[gerNum(0, produtosAleatorios.length - 1)];
         const precoProduto = gerNum(0.90, 10); // define um preço aleatório
@@ -59,7 +59,7 @@ function gerarProdutos(qtdProdutos) {
             id: gerarId(),
             nome: nomeProduto,
             preco: precoProduto,
-            dataVenc: datasProd.toLocaleDateString("pt-BR")
+            dataVenc: datasProd
         }
 
         // adiciona o objeto do produto ao final do vetor produtosGerados
