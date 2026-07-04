@@ -7,7 +7,12 @@ O que fazer: Escreva o fluxo lógico para filtrar e exibir uma lista apenas com 
 ---
 
 ## 🎯 Aprendizados Praticados
-- 
+- Maths.random();
+- Funções;
+- Vetores, Vetores de Objetos e Métodos;
+- Date (get, construtor e comparações);
+- for;
+- forEach;
 
 ---
 
