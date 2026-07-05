@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças e Prazos Críticos</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO DO SISTEMA -->
+    <header class="cabecalho-principal">
+        <div class="container-flex">
+            <h1 class="logo">💲 Finanças<span>&</span>Prazos</h1>
+            <div class="usuario-logado">Estudante de Lógica</div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo-principal">
+
+        <!-- SEÇÃO DE METRICAS / DASHBOARD -->
+        <section class="painel-dashboard">
+            <div class="cartao cartao-saldo">
+                <h3>Saldo Atual</h3>
+                <!-- O JavaScript irá alterar o valor abaixo -->
+                <p>R$ <span id="total-saldo">0,00</span></p>
+            </div>
+            <div class="cartao cartao-atencao">
+                <h3>A Vencer (7 dias)</h3>
+                <!-- O JavaScript irá alterar o contador abaixo -->
+                <p><span id="total-atencao">0</span> contas</p>
+            </div>
+            <div class="cartao cartao-atraso">
+                <h3>Em Atraso</h3>
+                <!-- O JavaScript irá alterar o contador abaixo -->
+                <p><span id="total-atraso">0</span> alertas</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE ADICIONAR NOVA TRANSAÇÃO -->
+        <section class="painel-formulario">
+            <h2>Nova Transação</h2>
+            <form id="formulario-transacao" autocomplete="off">
+                <div class="grupo-campo">
+                    <label for="descricao">Descrição da Conta / Origem</label>
+                    <input type="text" id="descricao" required placeholder="Ex: Conta de Luz, Salário...">
+                </div>
+
+                <div class="linha-campos">
+                    <div class="grupo-campo">
+                        <label for="valor">Valor (R$)</label>
+                        <input type="number" id="valor" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" required>
+                            <option value="entrada">Entrada (Receber)</option>
+                            <option value="saida" selected>Saída (Pagar)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="vencimento">Data de Vencimento</label>
+                    <input type="date" id="vencimento" required>
+                </div>
+
+                <button type="submit" class="botao-adicionar">➕ Adicionar Transação</button>
+            </form>
+        </section>
+
+        <!-- SEÇÃO DE ALERTAS CRÍTICOS (ZONA DE ATENÇÃO) -->
+        <section class="painel-alertas" id="zona-alertas">
+            <!-- Exemplo de elemento a ser criado em JS:
+            <div class="alerta-item">⚠️ A conta "Internet" está atrasada há 3 dias!</div> 
+            -->
+            
+        </section>
+
+        <!-- SEÇÃO DE HISTÓRICO E FILTROS -->
+        <section class="painel-lista">
+            <div class="topo-lista">
+                <h2>Histórico de Transações</h2>
+                <div class="filtros">
+                    <button class="botao-filtro ativo" data-filtro="todos">Todas</button>
+                    <button class="botao-filtro" data-filtro="entrada">Entradas</button>
+                    <button class="botao-filtro" data-filtro="saida">Saídas</button>
+                    <button class="botao-filtro" data-filtro="atrasadas">Atrasadas</button>
+                </div>
+            </div>
+
+            <div class="container-tabela">
+                <table class="tabela-transacoes">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Status / Prazo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela">
+                        <!-- 
+                            Aqui será exibida a lista de tarefas/transações via JavaScript 
+                            utilizando um loop (forEach) e Template Literals.
+                        -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

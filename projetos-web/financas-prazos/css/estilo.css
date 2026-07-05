@@ -1,0 +1,330 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E VARIÁVEIS (:root)
+   ========================================================================== */
+:root {
+    /* Paleta de Cores do Projeto */
+    --cor-fundo: #f4f6f9;
+    --cor-card-fundo: #ffffff;
+    --cor-texto-principal: #2d3748;
+    --cor-texto-secundario: #718096;
+    
+    --cor-primaria: #4a5568;
+    --cor-sucesso: #2f855a;
+    --cor-sucesso-fundo: #f0fff4;
+    --cor-alerta: #dd6b20;
+    --cor-alerta-fundo: #fffaf0;
+    --cor-erro: #c53030;
+    --cor-erro-fundo: #fff5f5;
+    
+    --borda-raio: 8px;
+    --sombra-padrao: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --fonte-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    padding-bottom: 40px;
+}
+
+/* CONTAINER FLEX DE AJUSTE GLOBAL */
+.container-flex {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==========================================================================
+   CABEÇALHO
+   ========================================================================== */
+.cabecalho-principal {
+    background-color: var(--cor-primaria);
+    color: #ffffff;
+    padding: 20px 0;
+    box-shadow: var(--sombra-padrao);
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #63b3ed;
+    margin: 0 4px;
+}
+
+.usuario-logado {
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL - ESTRUTURA GERAL (MOBILE FIRST)
+   ========================================================================== */
+.conteudo-principal {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: block; /* Empilhado no celular */
+}
+
+/* ==========================================================================
+   PAINEL DASHBOARD (MÉTRICAS)
+   ========================================================================== */
+.painel-dashboard {
+    display: block; /* Empilhado por padrão */
+    margin-bottom: 25px;
+}
+
+.cartao {
+    background-color: var(--cor-card-fundo);
+    border-radius: var(--borda-raio);
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: var(--sombra-padrao);
+    border-left: 5px solid var(--cor-texto-secundario);
+}
+
+.cartao h3 {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.cartao p {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Variantes dos cartões para feedback visual */
+.cartao-saldo { border-left-color: var(--cor-sucesso); color: var(--cor-sucesso); }
+.cartao-atencao { border-left-color: var(--cor-alerta); color: var(--cor-alerta); }
+.cartao-atraso { border-left-color: var(--cor-erro); color: var(--cor-erro); }
+
+/* ==========================================================================
+   FORMULÁRIO DE TRANSAÇÕES
+   ========================================================================== */
+.painel-formulario {
+    background-color: var(--cor-card-fundo);
+    border-radius: var(--borda-raio);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--sombra-padrao);
+}
+
+.painel-formulario h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--cor-fundo);
+    padding-bottom: 10px;
+}
+
+.grupo-campo {
+    margin-bottom: 15px;
+}
+
+.grupo-campo label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--cor-texto-principal);
+}
+
+.grupo-campo input, 
+.grupo-campo select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    background-color: #ffe; /* Destaque sutil para digitação */
+    transition: border-color 0.2s;
+}
+
+.grupo-campo input:focus, 
+.grupo-campo select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    background-color: #fff;
+}
+
+.linha-campos {
+    display: block; /* No mobile fica um embaixo do outro */
+}
+
+.botao-adicionar {
+    width: 100%;
+    background-color: var(--cor-sucesso);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.botao-adicionar:hover {
+    background-color: #22543d;
+}
+
+/* ==========================================================================
+   PAINEL DE ALERTAS CRÍTICOS
+   ========================================================================== */
+.painel-alertas {
+    margin-bottom: 25px;
+}
+
+.alerta-item {
+    background-color: var(--cor-erro-fundo);
+    color: var(--cor-erro);
+    border: 1px solid #fed7d7;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   LISTA DE TRANSAÇÕES E FILTROS
+   ========================================================================== */
+.painel-lista {
+    background-color: var(--cor-card-fundo);
+    border-radius: var(--borda-raio);
+    padding: 25px;
+    box-shadow: var(--sombra-padrao);
+}
+
+.topo-lista {
+    margin-bottom: 20px;
+}
+
+.topo-lista h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.botao-filtro {
+    background-color: var(--cor-fundo);
+    border: 1px solid #e2e8f0;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--cor-texto-secundario);
+}
+
+.botao-filtro.ativo {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+/* TABELA RESPONSIVA */
+.container-tabela {
+    width: 100%;
+    overflow-x: auto; /* Permite rolagem lateral no celular se a tabela for grande */
+}
+
+.tabela-transacoes {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabela-transacoes th {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    padding: 12px;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.tabela-transacoes td {
+    padding: 12px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Classes utilitárias que seu JS pode injetar na tabela para estilizar o status */
+.status-entrada { color: var(--cor-sucesso); font-weight: bold; }
+.status-saida { color: var(--cor-texto-principal); }
+.status-prazo-ok { background-color: var(--cor-sucesso-fundo); color: var(--cor-sucesso); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+.status-prazo-critico { background-color: var(--cor-alerta-fundo); color: var(--cor-alerta); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+.status-prazo-atraso { background-color: var(--cor-erro-fundo); color: var(--cor-erro); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+
+.botao-deletar {
+    background-color: transparent;
+    color: var(--cor-erro);
+    border: 1px solid #fed7d7;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.botao-deletar:hover {
+    background-color: var(--cor-erro);
+    color: white;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MEDIA QUERIES) -> DISPOSITIVOS GRANDES / TABLETS / PC
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Dashboard vira 3 colunas lado a lado */
+    .painel-dashboard {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .cartao {
+        margin-bottom: 0;
+    }
+
+    /* Campos do formulário ficam lado a lado */
+    .linha-campos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .topo-lista {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .topo-lista h2 {
+        margin-bottom: 0;
+    }
+}
