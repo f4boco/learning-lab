@@ -105,9 +105,7 @@ function exibirProdutos(textoConteiner, lista) {
     // verifica se a lista está vazia
     if (lista.length === 0) {
         const pVazio = document.createElement("p");
-        pVazio.innerHTML = `
-            <p>Nenhum produto para ser Exibido</p>
-            `;
+        pVazio.innerText = "Nenhum produto para ser Exibido";
         outProdutos.appendChild(pVazio);
     } else {
         // para cada elemento da lista
@@ -121,7 +119,7 @@ function exibirProdutos(textoConteiner, lista) {
             // cria o html que exibe na tela
             produtoHtml.innerHTML = `
                 <p>${element.nome}</p>
-                <smal><strong>Validade:</strong> ${element.dataVenc.toLocaleDateString("pt-BR")}</small>
+                <small><strong>Validade:</strong> ${element.dataVenc.toLocaleDateString("pt-BR")}</small>
                 `;
 
             // adiciona o elemento criado ao elemento de saída
