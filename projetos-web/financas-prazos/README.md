@@ -45,7 +45,7 @@ Abra o arquivo principal no navegador ou execute o comando correspondente ao pro
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Fabiano O.*
+Desenvolvido por **Fabiano O.**
 
 GitHub: https://github.com/Fabiano-Olivr
 
