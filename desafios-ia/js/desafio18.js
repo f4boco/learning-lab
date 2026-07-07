@@ -9,27 +9,21 @@ const inMes = document.getElementById("inMes");
 
 // vetor de colaboradores
 const colaboradores = [
-  { nome: "Ana Silva", dataNascimento: new Date("1995-07-14") },
-  { nome: "Carlos Souza", dataNascimento: new Date("1988-03-22") },
-  { nome: "Beatriz Costa", dataNascimento: new Date("2000-07-05") },
-  { nome: "David Oliveira", dataNascimento: new Date("1992-12-25") }
+    { nome: "Ana Silva", dataNascimento: new Date("1995-07-14") },
+    { nome: "Carlos Souza", dataNascimento: new Date("1988-03-22") },
+    { nome: "Beatriz Costa", dataNascimento: new Date("2000-07-05") },
+    { nome: "David Oliveira", dataNascimento: new Date("1992-12-25") }
 ];
 
-// bloco de Execução
-{
-    // executa a função para gerar as opções do select
-    gerarOpcoes();
-}
-
 // bloco que gera as opções do select inMes
-function gerarOpcoes() {
+{
     // meses de opções
     const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
         "Setembro", "Outubro", "Novembro", "Dezembro"];
     const mesAtual = new Date().getMonth(); // Obtém o mês atual (0-11)
 
     // pera cada elemento de meses
-    meses.forEach((mes,i) => {
+    meses.forEach((mes, i) => {
         // cria e monta o elemento html de opção
         const novaOpcao = document.createElement("option");
         novaOpcao.value = i;

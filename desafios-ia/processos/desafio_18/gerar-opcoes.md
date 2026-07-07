@@ -11,7 +11,7 @@ O Site é Carregado
 ## Fluxo
 
 1. Referenciar o elemento html `inMes`;  
-2. Criar uma função `listarOpcoes`:  
+2. Criar um bloco para listar as opções:  
     2.1 Criar um vetor `meses` com todos os meses do ano;  
     2.2 Obter o `mesAtual` com `new Data().getMonth()`;  
     2.3 Percorrer todos os elementos do vetor `meses` com `forEach()`;  
