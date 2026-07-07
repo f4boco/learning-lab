@@ -27,14 +27,11 @@ function gerarOpcoes() {
         "Setembro", "Outubro", "Novembro", "Dezembro"];
     const mesAtual = new Date().getMonth(); // Obtém o mês atual (0-11)
 
-    // percorre todo o vetor meses
-    for (let i = 0; i < meses.length; i++) {
-        // obtém o mes correspondente ao loop atual
-        const mes = meses[i];
-
+    // pera cada elemento de meses
+    meses.forEach((mes,i) => {
         // cria e monta o elemento html de opção
         const novaOpcao = document.createElement("option");
-        novaOpcao.value = mes.slice(0, 2); // define apenas as três primeiras letras
+        novaOpcao.value = mes.slice(0, 3); // define apenas as três primeiras letras
         novaOpcao.text = mes;
         // verifica se é o mês atual
         if (i === mesAtual)
@@ -42,5 +39,5 @@ function gerarOpcoes() {
 
         // adiciona a opção criada o select
         inMes.appendChild(novaOpcao);
-    }
+    });
 }
