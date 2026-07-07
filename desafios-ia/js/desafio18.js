@@ -1,5 +1,6 @@
 /**
- * esse script gera as opções de meses...
+ * esse script gera as opções de meses. Depois, gerar um novo array contendo apenas os nomes
+ * dos colaboradores que fazem aniversário no mês selecionado pelo usuário.
  * autor: Fabiano O.
  */
 
@@ -20,7 +21,7 @@ const colaboradores = [
     gerarOpcoes();
 }
 
-// função que gera as opções do select inMes
+// bloco que gera as opções do select inMes
 function gerarOpcoes() {
     // meses de opções
     const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
@@ -31,7 +32,7 @@ function gerarOpcoes() {
     meses.forEach((mes,i) => {
         // cria e monta o elemento html de opção
         const novaOpcao = document.createElement("option");
-        novaOpcao.value = mes.slice(0, 3); // define apenas as três primeiras letras
+        novaOpcao.value = i;
         novaOpcao.text = mes;
         // verifica se é o mês atual
         if (i === mesAtual)
@@ -40,4 +41,29 @@ function gerarOpcoes() {
         // adiciona a opção criada o select
         inMes.appendChild(novaOpcao);
     });
+}
+
+// função que gera o vetor com os aniversariantes do mês
+function agruparAniversariantes() {
+    // obtém o mês selecionado pelo usuário
+    const mesSelecionado = Number(inMes.value);
+
+    // filtra os colaboradores que o mes de nascimento é igual ao mes selecionado
+    const aniversariantes = colaboradores.filter(colaborador => {
+        const mesColaborador = colaborador.dataNascimento.getMonth();
+        return mesColaborador === mesSelecionado;
+    });
+    // cria um novo vetor coma os nomes dos colaboradores
+    const nomesAniversariantes = aniversariantes.map(funcionario => funcionario.nome);
+
+    // chama a função de exibição
+    exibirAniversariantes(nomesAniversariantes);
+}
+// referencia o btAgrupar e associa a função agruparAniversariantes ao evento click
+document.getElementById("btAgrupar").addEventListener("click", agruparAniversariantes);
+
+// função que exibe os aniversariantes
+function exibirAniversariantes(listaAniversariantes) {
+    // referencia o elemento html de saída e exibe os nomes da lista
+    document.getElementById("outSaida").innerText = listaAniversariantes.join(" - ");
 }
