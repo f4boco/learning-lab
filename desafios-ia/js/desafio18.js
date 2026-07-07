@@ -22,7 +22,7 @@ const colaboradores = [
         "Setembro", "Outubro", "Novembro", "Dezembro"];
     const mesAtual = new Date().getMonth(); // Obtém o mês atual (0-11)
 
-    // pera cada elemento de meses
+    // para cada elemento de meses
     meses.forEach((mes, i) => {
         // cria e monta o elemento html de opção
         const novaOpcao = document.createElement("option");
@@ -42,16 +42,16 @@ function agruparAniversariantes() {
     // obtém o mês selecionado pelo usuário
     const mesSelecionado = Number(inMes.value);
 
-    // filtra os colaboradores que o mes de nascimento é igual ao mes selecionado
-    const aniversariantes = colaboradores.filter(colaborador => {
-        const mesColaborador = colaborador.dataNascimento.getMonth();
-        return mesColaborador === mesSelecionado;
-    });
-    // cria um novo vetor coma os nomes dos colaboradores
-    const nomesAniversariantes = aniversariantes.map(funcionario => funcionario.nome);
+    // filtra os aniversariantes do mes selecionado e cria um novo vetor com os nomes
+    const aniversariantes = colaboradores
+        .filter(colaborador => {
+            const mesColaborador = colaborador.dataNascimento.getUTCMonth(); // uso o UTC pra evitar problemas com fusohorários
+            return mesColaborador === mesSelecionado;
+        })
+        .map(funcionario => funcionario.nome);
 
     // chama a função de exibição
-    exibirAniversariantes(nomesAniversariantes);
+    exibirAniversariantes(aniversariantes);
 }
 // referencia o btAgrupar e associa a função agruparAniversariantes ao evento click
 document.getElementById("btAgrupar").addEventListener("click", agruparAniversariantes);
