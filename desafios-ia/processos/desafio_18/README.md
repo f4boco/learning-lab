@@ -11,24 +11,22 @@ const colaboradores = [
 ];
 ```
 
----
-
 ## 🎯 Aprendizados Praticados
-- 
-
----
+- Data (ISO e UTC);
+- Vetor e Vetor de Objetos;
+- Métodos de vetor (*map()* e *filter()*);
+- forEach;
+- Funções;
+- UI no JS;
 
 ## 📝 Feedback da IA
 
+> O script implementado no arquivo desafio18.js realiza a filtragem de coleções de objetos através do uso encadeado dos métodos funcionais .filter() e .map(). O preenchimento dinâmico dos elementos de opção do DOM foi integrado ao índice nativo de meses do JavaScript (0-11), assegurando a consistência lógica dos dados. O código demonstra excelente aplicação de manipulação de arrays e controle de fluxo voltado à interface pública. Como melhoria futura para o padrão de produção, recomenda-se a implementação de um tratamento visual na interface para os casos em que a busca retorne um array vazio.
 > 
-> 
-
 
 ## 🔮 Melhorias Futuras
 
-* [ ] 
-
----
+* [ ] Implementar um tratamento visual na interface para os casos em que a busca retorne um array vazio;
 
 ## 👨‍💻 Autor
 
