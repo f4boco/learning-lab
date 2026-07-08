@@ -7,16 +7,16 @@
 * "Agendamento confirmado com sucesso!", se passar nas duas validações.
 
 ## 🎯 Aprendizados Praticados
-- 
+- Objeto Date e Métodos Date;
+- Strings e Métodos Strings;
+- Vetor;
+- Condicionais;
+- Funções.
 
 ## 📝 Feedback da IA
 
+> O script implementado no arquivo desafio19.js gerencia regras de validação cronológica para um fluxo de agendamentos, impedindo registros em datas pretéritas ou em finais de semana. A lógica de desestruturação e conversão de strings de entrada foi executada com métodos nativos funcionais, demonstrando boa modularidade de escopo. A revisão técnica identificou uma assimetria na intenção de uso do fuso horário, onde o construtor numérico padrão instanciou o objeto no fuso local do cliente, gerando possíveis inconsistências com o método .getDay().
 > 
-> 
-
-## 🔮 Melhorias Futuras
-
-* [ ] 
 
 ## 👨‍💻 Autor
 
