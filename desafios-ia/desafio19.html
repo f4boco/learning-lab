@@ -16,9 +16,11 @@
         <main class="main-duplo">
             <section class="secao-entradas">
                 <h2>[Entradas] - Data</h2>
-                <label for="inMes">Defina o Mês</label>
-                <input type="date" required>
-                <button type="button" id="btAgendar">Agendar Atendimento</button>
+                <form id="formulario-data">
+                    <label for="inData">Defina o Mês</label>
+                    <input type="date" id="inData" required>
+                    <button type="submit">Agendar Atendimento</button>
+                </form>
             </section>
             <section class="secao-saida">
                 <h2 id="outTitulo">[Saída] -  Status do Agendamento</h2>
