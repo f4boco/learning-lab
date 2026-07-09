@@ -5,6 +5,7 @@
  * autor: Fabiano O.
  */
 
+let mensagemCriptografada; // receberá a mensagem criptografada
 
 // função que criptografa a mensagem
 function criptografarMensagem() {
@@ -12,25 +13,33 @@ function criptografarMensagem() {
     const inMensagem = document.getElementById("inMensagem");
     const mensagem = inMensagem.value.trim(); // obtém o conteúdo e remove os espaços dos extremos
 
+    
     // verifica se a entrada é uma mensagem válida
-    if (mensagem === ""  || mensagem.length < 2) {
+    if (mensagem === "" || mensagem.length < 2) {
         alert("Mensagem inválida ou muito curta.");
         inMensagem.value = "";
         inMensagem.focus();
         return;
     }
+    
+    let menCriptoPar = ""; // receberá a parte par da mensagem cirptografada
+    let menCriptoImpar = ""; // receberá a parte impar da mensagem criptografada
 
-    // cria uma nova string com apenas os carcteres dos index pares
-    const mensagemCripto = 
-        mensagem.split("")
-        .filter((caractere, i) => {
+    // separa os caracteres pares e impares
+    mensagem.split("")
+        .forEach((caractere, i) => {
             if (i % 2 === 0) {
-               return caractere;
+                menCriptoPar += caractere;
+            } else {
+                menCriptoImpar += caractere;
             }
         });
-    
+
+    // monta a mensagem criptografada
+    mensagemCriptografada = menCriptoImpar + menCriptoPar;
+
     // chama a função de exibir mensagem
-    exibirMensagem(mensagemCripto.join(""), "Criptografada");
+    exibirMensagem(mensagemCriptografada, "Criptografada");
 }
 // referencia o btCriptografar
 const btCriptografar = document.getElementById("btCriptografar");
