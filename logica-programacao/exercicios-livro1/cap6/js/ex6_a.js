@@ -49,3 +49,38 @@ btCriptografar.addEventListener("click", criptografarMensagem); // associa a fun
 function exibirMensagem(mensagem, criptografadaSN) {
     document.getElementById("outSaida").innerHTML = `Mensagem ${criptografadaSN}:\n${mensagem}`;
 }
+
+// função que descriptografa a mensagem
+function descriptografarMensagem(mensagemCripto) {
+    let mensagem = ""; // receberá a mensagem descriptografada
+    const qtdCar = mensagemCripto.length;
+
+    // quebra a mensagem em duas partes
+    const partPar = mensagemCripto.slice(Math.floor(qtdCar / 2), qtdCar);
+    const partImpar = mensagemCripto.slice(0, Math.floor(Math.floor(qtdCar / 2)));
+
+    // junta as duas partes (caractere por caractere)
+    for (let i = 0; i < partPar.length; i++) {
+        mensagem += partPar.charAt(i);
+
+        // evita queber o código, tenha menos carctere impar
+        if (i < partImpar.length) {
+            mensagem += partImpar.charAt(i);
+        }
+    }
+
+    return mensagem;
+}
+// referencia o btDesCriptografar
+const btDesCriptografar = document.getElementById("btDesCriptografar");
+btDesCriptografar.addEventListener("click", () => {
+    // verifica se existe mmensagem criptografada
+    if (mensagemCriptografada === undefined) {
+        alert("Não há mensagem para descriptografar...");
+        inMensagem.focus();
+        return;
+    }
+
+    // exibe a mensagem DEScriptografada
+    exibirMensagem(descriptografarMensagem(mensagemCriptografada), "Descriptografada");
+});
