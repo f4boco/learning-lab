@@ -77,7 +77,6 @@ btDesCriptografar.addEventListener("click", () => {
     // verifica se existe mmensagem criptografada
     if (mensagemCriptografada === undefined) {
         alert("Não há mensagem para descriptografar...");
-        inMensagem.focus();
         return;
     }
 
