@@ -1,5 +1,6 @@
 /**
- * esse script obtém as entradas digitadas pelo usuário, ...
+ * esse script obtém as entradas/transações digitadas pelo usuário, exibe um histórico
+ * de transações, ...
  * 
  * autor: Fabiano O.
  */
@@ -55,6 +56,9 @@ formulario.addEventListener("submit", function (event) {
     // adiciona o objeto ao final do vetor transacoes
     transacoes.push(transacao);
 
+    // chama a função de exibição
+    exibirHistorico(transacoes);
+
     formulario.reset();
 });
 
@@ -76,4 +80,48 @@ function gerarID() {
 // função que gera número aleatórios com intervalos definidos
 function gerarNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// função que exibe os histórico de transações
+function exibirHistorico(vetorTransacoes) {
+    // referencia o elemento de exibição
+    const corpoTabela = document.getElementById("corpo-tabela");
+    corpoTabela.innerHTML = "";
+
+    // verifica se o vetor está vazio
+    if (vetorTransacoes.lenght === 0) {
+        corpoTabela.innerHTML = `<small>Nenhuma Transação!</small>`;
+        return;
+    }
+
+    // para cada transação do vetor trasações ...
+    vetorTransacoes.forEach(transacao => {
+        // cria um elemento de tr
+        const trTransacao = document.createElement("tr");
+
+        // define o status
+        const status = "";
+        const hoje  = new Date();
+        if (transacao.vencimento > hoje) {
+            status = "prazo-atraso";
+        } else if (transacao.vencimento === hoje) {
+            status = "prazo-critico";
+        } else {
+            status = "prazo-ok";
+        }
+
+        // monta o html
+        trTransacao.innerHTML = `
+            <td>${transacao.descricao}</td>
+            <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
+            <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
+            <td><span class="status-${status}">${status.match(/\-\\w+/gi)}</span></td>
+            <td>
+                <button class="botao-deletar" data-id="1">Excluir</button>
+            </td>
+        `;
+
+        // adiciona o elemento da transacao ao elemento de exibição
+        corpoTabela.appendChild(trTransacao);
+    });
 }

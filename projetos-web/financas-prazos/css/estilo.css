@@ -276,7 +276,7 @@ body {
 
 /* Classes utilitárias que seu JS pode injetar na tabela para estilizar o status */
 .status-entrada { color: var(--cor-sucesso); font-weight: bold; }
-.status-saida { color: var(--cor-texto-principal); }
+.status-saida { color: var(--cor-erro); }
 .status-prazo-ok { background-color: var(--cor-sucesso-fundo); color: var(--cor-sucesso); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
 .status-prazo-critico { background-color: var(--cor-alerta-fundo); color: var(--cor-alerta); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
 .status-prazo-atraso { background-color: var(--cor-erro-fundo); color: var(--cor-erro); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
