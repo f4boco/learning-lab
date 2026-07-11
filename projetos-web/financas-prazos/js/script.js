@@ -121,7 +121,12 @@ function exibirHistorico(vetorTransacoes) {
             <td>${transacao.descricao}</td>
             <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
             <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
-            <td><span class="status-${status}">${status.match(/(?<=-)\w+/gi)}</span></td>
+            <td><span class="status-${status}">
+                ${transacao.tipo === "entrada"
+                    ? " - "
+                    : status.match(/(?<=-)\w+/gi).toString().toUpperCase()
+                }
+            </span></td>
             <td>
                 <button class="botao-deletar" data-id="1">Excluir</button>
             </td>
