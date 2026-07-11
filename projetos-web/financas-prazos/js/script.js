@@ -59,6 +59,9 @@ formulario.addEventListener("submit", function (event) {
     // chama a função de exibição
     exibirHistorico(transacoes);
 
+    // chama a função de atualização dos cards
+    atualizarCards(transacoes);
+
     formulario.reset();
 });
 
@@ -127,4 +130,27 @@ function exibirHistorico(vetorTransacoes) {
         // adiciona o elemento da transacao ao elemento de exibição
         corpoTabela.appendChild(trTransacao);
     });
+}
+
+// função que atualiza os cards
+function atualizarCards(vetorTransacoes) {
+    // referencia os elementos html dos cards
+    const totalSaldo = document.getElementById("total-saldo");
+    const totalAtencao = document.getElementById("total-atencao");
+    const totalAtraso = document.getElementById("total-atraso");
+
+    // entrada - saida
+    const saldo = vetorTransacoes.reduce((ac, transacao) => {
+        // seleciona apenas as transacoes de entrada
+        if (transacao.tipo === "entrada") {
+            ac += transacao.valor;
+        }
+        return ac;
+    }, 0) - vetorTransacoes.reduce((ac, transacao) => {
+        // seleciona apenas as transacoes de saida
+        if (transacao.tipo === "saida") {
+            ac += transacao.valor;
+        }
+        return ac;
+    }, 0);
 }
