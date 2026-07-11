@@ -103,9 +103,9 @@ function exibirHistorico(vetorTransacoes) {
         const trTransacao = document.createElement("tr");
 
         // obtém a data atual para comparação
-        let hoje  = new Date();
+        let hoje = new Date();
         hoje.setHours(0, 0, 0, 0); // zera a hora
-        
+
         // define o status, comparando por milissegundos
         let status = "";
         if (transacao.vencimento.getTime() < hoje.getTime()) {
@@ -132,6 +132,15 @@ function exibirHistorico(vetorTransacoes) {
     });
 }
 
+// função que retorna um novo objeto data hoje
+function novoHoje() {
+    // obtém a data atual
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0); // zera a hora
+
+    return hoje;
+}
+
 // função que atualiza os cards
 function atualizarCards(vetorTransacoes) {
     // referencia os elementos html dos cards
@@ -139,18 +148,49 @@ function atualizarCards(vetorTransacoes) {
     const totalAtencao = document.getElementById("total-atencao");
     const totalAtraso = document.getElementById("total-atraso");
 
+    // obtém a data atua
+    const hoje = novoHoje().getTime();
+
     // entrada - saida
     const saldo = vetorTransacoes.reduce((ac, transacao) => {
         // seleciona apenas as transacoes de entrada
         if (transacao.tipo === "entrada") {
             ac += transacao.valor;
-        }
-        return ac;
-    }, 0) - vetorTransacoes.reduce((ac, transacao) => {
-        // seleciona apenas as transacoes de saida
-        if (transacao.tipo === "saida") {
-            ac += transacao.valor;
+        } else {
+            ac -= transacao.valor;
         }
         return ac;
     }, 0);
+
+    // conta as contas que estão a vencer
+    const atencao = vetorTransacoes.filter(transacao => {
+        // cria uma nova data com mais 7 dias a frente
+        const hojeMaisSete = new Date(hoje + (7 * 86400000)).getTime();
+
+        // verifica se é do tipo saida
+        if (transacao.tipo === "saida") {
+            const venc = transacao.vencimento.getTime();
+            // verifica se o vencimento está no período dos 7 dias
+            if (venc >= hoje && venc <= hojeMaisSete) {
+                return true;
+            }
+        }
+    }).length;
+
+    // conta as contas que estã vencidas
+    const atraso = vetorTransacoes.filter(transacao => {
+        // verifica se é do tipo saida
+        if (transacao.tipo === "saida") {
+            const venc = transacao.vencimento.getTime();
+            // verifica se o vencimento está no período dos 7 dias
+            if (venc < hoje) {
+                return true;
+            }
+        }
+    }).length;
+
+    // adiciona os valores aos elementos html
+    totalSaldo.innerText = saldo.toFixed(2);
+    totalAtencao.innerText = atencao;
+    totalAtraso.innerText = atraso;
 }
