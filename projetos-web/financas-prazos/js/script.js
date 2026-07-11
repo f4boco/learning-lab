@@ -99,12 +99,15 @@ function exibirHistorico(vetorTransacoes) {
         // cria um elemento de tr
         const trTransacao = document.createElement("tr");
 
-        // define o status
-        const status = "";
-        const hoje  = new Date();
-        if (transacao.vencimento > hoje) {
+        // obtém a data atual para comparação
+        let hoje  = new Date();
+        hoje.setHours(0, 0, 0, 0); // zera a hora
+        
+        // define o status, comparando por milissegundos
+        let status = "";
+        if (transacao.vencimento.getTime() < hoje.getTime()) {
             status = "prazo-atraso";
-        } else if (transacao.vencimento === hoje) {
+        } else if (transacao.vencimento.getTime() === hoje.getTime()) {
             status = "prazo-critico";
         } else {
             status = "prazo-ok";
@@ -115,7 +118,7 @@ function exibirHistorico(vetorTransacoes) {
             <td>${transacao.descricao}</td>
             <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
             <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
-            <td><span class="status-${status}">${status.match(/\-\\w+/gi)}</span></td>
+            <td><span class="status-${status}">${status.match(/(?<=-)\w+/gi)}</span></td>
             <td>
                 <button class="botao-deletar" data-id="1">Excluir</button>
             </td>
