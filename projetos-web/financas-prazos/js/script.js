@@ -162,30 +162,26 @@ function atualizarCards(vetorTransacoes) {
         return ac;
     }, 0);
 
+    // filtra apenas as transacoes do tipo saida
+    const transacSaida = vetorTransacoes.filter(transacao => transacao.tipo === "saida");
+
     // conta as contas que estão a vencer
-    const atencao = vetorTransacoes.filter(transacao => {
+    const atencao = transacSaida.filter(transacao => {
         // cria uma nova data com mais 7 dias a frente
         const hojeMaisSete = new Date(hoje + (7 * 86400000)).getTime();
 
-        // verifica se é do tipo saida
-        if (transacao.tipo === "saida") {
-            const venc = transacao.vencimento.getTime();
-            // verifica se o vencimento está no período dos 7 dias
-            if (venc >= hoje && venc <= hojeMaisSete) {
-                return true;
-            }
+        // verifica se o vencimento está no período dos 7 dias
+        const venc = transacao.vencimento.getTime();
+        if (venc >= hoje && venc <= hojeMaisSete) {
+            return true;
         }
     }).length;
 
     // conta as contas que estã vencidas
-    const atraso = vetorTransacoes.filter(transacao => {
-        // verifica se é do tipo saida
-        if (transacao.tipo === "saida") {
-            const venc = transacao.vencimento.getTime();
-            // verifica se o vencimento está no período dos 7 dias
-            if (venc < hoje) {
-                return true;
-            }
+    const atraso = transacSaida.filter(transacao => {
+        const venc = transacao.vencimento.getTime();
+        if (venc < hoje) {
+            return true;
         }
     }).length;
 
