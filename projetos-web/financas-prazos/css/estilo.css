@@ -281,14 +281,21 @@ body {
 .status-prazo-critico { background-color: var(--cor-alerta-fundo); color: var(--cor-alerta); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
 .status-prazo-atraso { background-color: var(--cor-erro-fundo); color: var(--cor-erro); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
 
-.botao-deletar {
+.botao-transacao {
     background-color: transparent;
-    color: var(--cor-erro);
-    border: 1px solid #fed7d7;
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.8rem;
+}
+
+.botao-transacao.deletar {
+    color: var(--cor-erro);
+    border: 1px solid #fed7d7;
+}
+
+.botao-transacao.ok {
+    border: none;
 }
 
 .botao-deletar:hover {
