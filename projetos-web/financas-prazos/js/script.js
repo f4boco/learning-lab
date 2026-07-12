@@ -126,7 +126,7 @@ function exibirHistorico(vetorTransacoes) {
             <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
             <td><span class="status-${transacao.status ? "entrada" : status}">${textoStatus}</span></td>
             <td>
-                <button class="botao-transacao deletar" data-id="1">Excluir</button>
+                <button class="botao-transacao deletar" onclick="deletarTransacao(${i})">Excluir</button>
                 <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
                     ? 'Recebido'
                     : 'Pago'
@@ -208,5 +208,11 @@ function atualizarCards(vetorTransacoes) {
 // função atualizar status
 function atualizarStatus(index) {
     transacoes[index].status = !transacoes[index].status;
+    exibirHistorico(transacoes);
+}
+
+// função que remove transacao
+function deletarTransacao(index) {
+    transacoes.splice(index, 1);
     exibirHistorico(transacoes);
 }
