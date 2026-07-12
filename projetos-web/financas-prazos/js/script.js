@@ -60,9 +60,6 @@ formulario.addEventListener("submit", function (event) {
     // chama a função de exibição
     exibirHistorico(transacoes);
 
-    // chama a função de atualização dos cards
-    atualizarCards(transacoes);
-
     formulario.reset();
 });
 
@@ -144,6 +141,9 @@ function exibirHistorico(vetorTransacoes) {
         // adiciona o elemento da transacao ao elemento de exibição
         corpoTabela.appendChild(trTransacao);
     });
+
+    // chama a função de atualização dos cards
+    atualizarCards(transacoes);
 }
 
 // função que retorna um novo objeto data hoje
@@ -176,11 +176,11 @@ function atualizarCards(vetorTransacoes) {
         return ac;
     }, 0);
 
-    // filtra apenas as transacoes do tipo saida
-    const transacSaida = vetorTransacoes.filter(transacao => transacao.tipo === "saida");
+    // cria um vetor apenas com as transações pendentes
+    const transacPendentes = vetorTransacoes.filter(transacao => !transacao.status);
 
     // conta as contas que estão a vencer
-    const atencao = transacSaida.filter(transacao => {
+    const atencao = transacPendentes.filter(transacao => {
         // cria uma nova data com mais 7 dias a frente
         const hojeMaisSete = new Date(hoje + (7 * 86400000)).getTime();
 
@@ -192,7 +192,7 @@ function atualizarCards(vetorTransacoes) {
     }).length;
 
     // conta as contas que estã vencidas
-    const atraso = transacSaida.filter(transacao => {
+    const atraso = transacPendentes.filter(transacao => {
         const venc = transacao.vencimento.getTime();
         if (venc < hoje) {
             return true;
