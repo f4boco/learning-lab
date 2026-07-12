@@ -134,9 +134,9 @@ function exibirHistorico(vetorTransacoes) {
             </span></td>
             <td>
                 <button class="botao-transacao deletar" data-id="1">Excluir</button>
-                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? "Não " : ""} ${transacao.tipo === "entrada"
-                    ? "Recebido"
-                    : "Pago"
+                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não ' : ''} ${transacao.tipo === 'entrada'
+                    ? 'Recebido'
+                    : 'Pago'
                 }">
                     ${transacao.status 
                         ? "\u{1F44E}" // emoji 👎
@@ -212,5 +212,6 @@ function atualizarCards(vetorTransacoes) {
 
 // função atualizar status
 function atualizarStatus(index) {
-    console.log("Em desenvolvimento...");
+    transacoes[index].status = !transacoes[index].status;
+    exibirHistorico(transacoes);
 }
