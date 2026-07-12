@@ -93,25 +93,24 @@ function exibirHistorico(vetorTransacoes) {
     corpoTabela.innerHTML = "";
 
     // verifica se o vetor está vazio
-    if (vetorTransacoes.lenght === 0) {
+    if (vetorTransacoes.length === 0) {
         corpoTabela.innerHTML = `<small>Nenhuma Transação!</small>`;
         return;
     }
+
+    // obtém a data atual para comparação
+    let hoje = novoHoje();
 
     // para cada transação do vetor trasações ...
     vetorTransacoes.forEach((transacao, i) => {
         // cria um elemento de tr
         const trTransacao = document.createElement("tr");
 
-        // obtém a data atual para comparação
-        let hoje = new Date();
-        hoje.setHours(0, 0, 0, 0); // zera a hora
-
         // define o status, comparando por milissegundos
         let status = "";
-        if (transacao.vencimento.getTime() < hoje.getTime()) {
+        if (transacao.vencimento.getTime() < hoje) {
             status = "prazo-atraso";
-        } else if (transacao.vencimento.getTime() === hoje.getTime()) {
+        } else if (transacao.vencimento.getTime() === hoje) {
             status = "prazo-critico";
         } else {
             status = "prazo-ok";
@@ -134,7 +133,7 @@ function exibirHistorico(vetorTransacoes) {
             </span></td>
             <td>
                 <button class="botao-transacao deletar" data-id="1">Excluir</button>
-                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não ' : ''} ${transacao.tipo === 'entrada'
+                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
                     ? 'Recebido'
                     : 'Pago'
                 }">
