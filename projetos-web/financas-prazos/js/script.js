@@ -92,55 +92,54 @@ function exibirHistorico(vetorTransacoes) {
     // verifica se o vetor está vazio
     if (vetorTransacoes.length === 0) {
         corpoTabela.innerHTML = `<small>Nenhuma Transação!</small>`;
-        return;
+    } else {
+        // obtém a data atual para comparação
+        let hoje = novoHoje().getTime();
+    
+        // para cada transação do vetor trasações ...
+        vetorTransacoes.forEach((transacao, i) => {
+            // cria um elemento de tr
+            const trTransacao = document.createElement("tr");
+    
+            // define o status, comparando por milissegundos
+            let status = "prazo-ok";
+            if (transacao.vencimento.getTime() < hoje) {
+                status = "prazo-atraso";
+            } else if (transacao.vencimento.getTime() === hoje) {
+                status = "prazo-critico";
+            }
+    
+            // define o texto a ser exibido na coluna status
+            let textoStatus;
+            if (transacao.tipo === "entrada") {
+                textoStatus = transacao.status ? "Recebido" : "Não Recebido"
+            } else {
+                textoStatus = transacao.status ? "Pago" : status.replace("prazo-", "").toUpperCase();
+            }
+    
+            // monta o html
+            trTransacao.innerHTML = `
+                <td>${transacao.descricao}</td>
+                <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
+                <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
+                <td><span class="status-${transacao.status ? "entrada" : status}">${textoStatus}</span></td>
+                <td>
+                    <button class="botao-transacao deletar" onclick="deletarTransacao(${i})">Excluir</button>
+                    <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
+                        ? 'Recebido'
+                        : 'Pago'
+                    }">${transacao.status 
+                        ? "\u{1F44E}" // emoji 👎
+                        : "\u{1F44D}" // emoji 👍
+                    }
+                    </button>
+                </td>
+            `;
+    
+            // adiciona o elemento da transacao ao elemento de exibição
+            corpoTabela.appendChild(trTransacao);
+        });
     }
-
-    // obtém a data atual para comparação
-    let hoje = novoHoje().getTime();
-
-    // para cada transação do vetor trasações ...
-    vetorTransacoes.forEach((transacao, i) => {
-        // cria um elemento de tr
-        const trTransacao = document.createElement("tr");
-
-        // define o status, comparando por milissegundos
-        let status = "prazo-ok";
-        if (transacao.vencimento.getTime() < hoje) {
-            status = "prazo-atraso";
-        } else if (transacao.vencimento.getTime() === hoje) {
-            status = "prazo-critico";
-        }
-
-        // define o texto a ser exibido na coluna status
-        let textoStatus;
-        if (transacao.tipo === "entrada") {
-            textoStatus = transacao.status ? "Recebido" : "Não Recebido"
-        } else {
-            textoStatus = transacao.status ? "Pago" : status.replace("prazo-", "").toUpperCase();
-        }
-
-        // monta o html
-        trTransacao.innerHTML = `
-            <td>${transacao.descricao}</td>
-            <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
-            <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
-            <td><span class="status-${transacao.status ? "entrada" : status}">${textoStatus}</span></td>
-            <td>
-                <button class="botao-transacao deletar" onclick="deletarTransacao(${i})">Excluir</button>
-                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
-                    ? 'Recebido'
-                    : 'Pago'
-                }">${transacao.status 
-                    ? "\u{1F44E}" // emoji 👎
-                    : "\u{1F44D}" // emoji 👍
-                }
-                </button>
-            </td>
-        `;
-
-        // adiciona o elemento da transacao ao elemento de exibição
-        corpoTabela.appendChild(trTransacao);
-    });
 
     // chama a função de atualização dos cards
     atualizarCards(transacoes);
