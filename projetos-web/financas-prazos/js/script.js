@@ -99,7 +99,7 @@ function exibirHistorico(vetorTransacoes) {
     }
 
     // obtém a data atual para comparação
-    let hoje = novoHoje();
+    let hoje = novoHoje().getTime();
 
     // para cada transação do vetor trasações ...
     vetorTransacoes.forEach((transacao, i) => {
@@ -107,13 +107,19 @@ function exibirHistorico(vetorTransacoes) {
         const trTransacao = document.createElement("tr");
 
         // define o status, comparando por milissegundos
-        let status = "";
+        let status = "prazo-ok";
         if (transacao.vencimento.getTime() < hoje) {
             status = "prazo-atraso";
         } else if (transacao.vencimento.getTime() === hoje) {
             status = "prazo-critico";
+        }
+
+        // define o texto a ser exibido na coluna status
+        let textoStatus;
+        if (transacao.tipo === "entrada") {
+            textoStatus = transacao.status ? "Recebido" : "Não Recebido"
         } else {
-            status = "prazo-ok";
+            textoStatus = transacao.status ? "Pago" : status.replace("prazo-", "").toUpperCase();
         }
 
         // monta o html
@@ -121,26 +127,16 @@ function exibirHistorico(vetorTransacoes) {
             <td>${transacao.descricao}</td>
             <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
             <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
-            <td><span class="status-${transacao.status ? "entrada" : status}">
-                ${transacao.tipo === "entrada" // é do tipo entrada?
-                    ? transacao.status // status é true
-                        ? "Recebido"
-                        : "Não Recebido"
-                    : transacao.status // não é entrada? status é true?
-                        ? "Pago"
-                        : status.match(/(?<=-)\w+/gi).toString().toUpperCase()
-                }
-            </span></td>
+            <td><span class="status-${transacao.status ? "entrada" : status}">${textoStatus}</span></td>
             <td>
                 <button class="botao-transacao deletar" data-id="1">Excluir</button>
                 <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
                     ? 'Recebido'
                     : 'Pago'
-                }">
-                    ${transacao.status 
-                        ? "\u{1F44E}" // emoji 👎
-                        : "\u{1F44D}" // emoji 👍
-                    }
+                }">${transacao.status 
+                    ? "\u{1F44E}" // emoji 👎
+                    : "\u{1F44D}" // emoji 👍
+                }
                 </button>
             </td>
         `;
