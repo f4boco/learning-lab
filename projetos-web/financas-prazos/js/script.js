@@ -1,6 +1,6 @@
 /**
  * esse script obtém as entradas/transações digitadas pelo usuário, exibe um histórico
- * de transações, ...
+ * de transações, alertas de atrasos, saldo, contagens e permite controlar o status das contas.
  * 
  * autor: Fabiano O.
  */
@@ -97,7 +97,7 @@ function exibirHistorico(vetorTransacoes) {
         let hoje = novoHoje().getTime();
     
         // para cada transação do vetor trasações ...
-        vetorTransacoes.forEach((transacao, i) => {
+        vetorTransacoes.forEach(transacao => {
             // cria um elemento de tr
             const trTransacao = document.createElement("tr");
     
@@ -124,8 +124,8 @@ function exibirHistorico(vetorTransacoes) {
                 <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
                 <td><span class="status-${transacao.status ? "entrada" : status}">${textoStatus}</span></td>
                 <td>
-                    <button class="botao-transacao deletar" onclick="deletarTransacao(${i})">Excluir</button>
-                    <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
+                    <button class="botao-transacao deletar" onclick="deletarTransacao(${identificarIndex(transacao.id, vetorTransacoes)})">Excluir</button>
+                    <button class="botao-transacao ok" onclick="atualizarStatus(${identificarIndex(transacao.id, vetorTransacoes)})" title="Marcar como ${transacao.status ? 'Não' : ''} ${transacao.tipo === 'entrada'
                         ? 'Recebido'
                         : 'Pago'
                     }">${transacao.status 
@@ -186,25 +186,25 @@ function atualizarCards(vetorTransacoes) {
         // cria uma nova data com mais 7 dias a frente
         const hojeMaisSete = new Date(hoje + (7 * 86400000)).getTime();
 
-        // verifica se o vencimento está no período dos 7 dias
         const venc = transacao.vencimento.getTime();
-        if (venc >= hoje && venc <= hojeMaisSete) {
-            return true;
-        }
+        return venc >= hoje && venc <= hojeMaisSete;
     }).length;
 
     // conta as contas que estã vencidas
     const atraso = transacPendentes.filter(transacao => {
         const venc = transacao.vencimento.getTime();
-        if (venc < hoje) {
-            return true;
-        }
+        return venc < hoje;
     }).length;
 
     // adiciona os valores aos elementos html
     totalSaldo.innerText = saldo.toFixed(2);
     totalAtencao.innerText = atencao;
     totalAtraso.innerText = atraso;
+}
+
+// função que identifica o index da transacao
+function identificarIndex(id, vetorTransacoes) {
+    return vetorTransacoes.findIndex(transacao => transacao.id === id);
 }
 
 // função atualizar status
@@ -250,7 +250,7 @@ function exibirAlertas(vetorTransacoes) {
     
             // monta o html do alerta
             divAlerta.innerHTML = `
-                <div class="alerta-item">\u{26A0} A conta <strong>"${transacao.descricao.toUpperCase()}"</strong> está atrasada há ${qtdDias} dias!</div>
+                <div class="alerta-item">\u{26A0} O(A) <strong>"${transacao.descricao.toUpperCase()}"</strong> está atrasada há ${qtdDias} dias!</div>
             `;
     
             // adiciona a div de alerta a zona de alerta
