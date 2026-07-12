@@ -50,7 +50,8 @@ formulario.addEventListener("submit", function (event) {
         descricao: descricao,
         valor: valor,
         tipo: tipo,
-        vencimento: vencimento
+        vencimento: vencimento,
+        status: false
     }
 
     // adiciona o objeto ao final do vetor transacoes
@@ -98,7 +99,7 @@ function exibirHistorico(vetorTransacoes) {
     }
 
     // para cada transação do vetor trasações ...
-    vetorTransacoes.forEach(transacao => {
+    vetorTransacoes.forEach((transacao, i) => {
         // cria um elemento de tr
         const trTransacao = document.createElement("tr");
 
@@ -121,18 +122,27 @@ function exibirHistorico(vetorTransacoes) {
             <td>${transacao.descricao}</td>
             <td class="status-${transacao.tipo}"> R$ ${transacao.valor.toFixed(2)}</td>
             <td>${transacao.vencimento.toLocaleDateString("pt-BR")}</td>
-            <td><span class="status-${status}">
-                ${transacao.tipo === "entrada"
-                ? " - "
-                : status.match(/(?<=-)\w+/gi).toString().toUpperCase()
-            }
+            <td><span class="status-${transacao.status ? "entrada" : status}">
+                ${transacao.tipo === "entrada" // é do tipo entrada?
+                    ? transacao.status // status é true
+                        ? "Recebido"
+                        : "Não Recebido"
+                    : transacao.status // não é entrada? status é true?
+                        ? "Pago"
+                        : status.match(/(?<=-)\w+/gi).toString().toUpperCase()
+                }
             </span></td>
             <td>
                 <button class="botao-transacao deletar" data-id="1">Excluir</button>
-                <button class="botao-transacao ok" title="Marcar como ${transacao.tipo === "entrada"
+                <button class="botao-transacao ok" onclick="atualizarStatus(${i})" title="Marcar como ${transacao.status ? "Não " : ""} ${transacao.tipo === "entrada"
                     ? "Recebido"
                     : "Pago"
-                }" data-id="1">\u{1F44D}</button>
+                }">
+                    ${transacao.status 
+                        ? "\u{1F44E}" // emoji 👎
+                        : "\u{1F44D}" // emoji 👍
+                    }
+                </button>
             </td>
         `;
 
@@ -198,4 +208,9 @@ function atualizarCards(vetorTransacoes) {
     totalSaldo.innerText = saldo.toFixed(2);
     totalAtencao.innerText = atencao;
     totalAtraso.innerText = atraso;
+}
+
+// função atualizar status
+function atualizarStatus(index) {
+    console.log("Em desenvolvimento...");
 }
