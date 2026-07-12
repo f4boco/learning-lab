@@ -144,6 +144,9 @@ function exibirHistorico(vetorTransacoes) {
 
     // chama a função de atualização dos cards
     atualizarCards(transacoes);
+
+    // chama a função que exibe alertas
+    exibirAlertas(transacoes);
 }
 
 // função que retorna um novo objeto data hoje
@@ -215,4 +218,44 @@ function atualizarStatus(index) {
 function deletarTransacao(index) {
     transacoes.splice(index, 1);
     exibirHistorico(transacoes);
+}
+
+// função que exibe alertas
+function exibirAlertas(vetorTransacoes) {
+    // referencia o elemento html da zona de alertas
+    const zonaAlertas = document.getElementById("zona-alertas");
+    zonaAlertas.innerHTML = "";
+
+    // verifica se o vetor é vazio
+    if (vetorTransacoes.length === 0) {
+        return;
+    }
+
+    // obtém a data de hoje para comparação
+    const hoje = novoHoje().getTime();
+
+    // obtém as atransações atrasadas e que o status é false
+    const atrasadas = vetorTransacoes.filter(transacao => {
+        return transacao.vencimento.getTime() < hoje && !transacao.status
+    });
+
+    // verifica se existem atrasadas
+    if (atrasadas.length !== 0) {
+        // para cada elemento de atrasadas
+        atrasadas.forEach(transacao => {
+            // calcula a quantidade de dias de atraso
+            const qtdDias = (hoje - transacao.vencimento.getTime()) / (24 * 60 * 60 * 1000);
+    
+            // cria um elemento div para o alerta
+            const divAlerta = document.createElement("div");
+    
+            // monta o html do alerta
+            divAlerta.innerHTML = `
+                <div class="alerta-item">\u{26A0} A conta <strong>"${transacao.descricao.toUpperCase()}"</strong> está atrasada há ${qtdDias} dias!</div>
+            `;
+    
+            // adiciona a div de alerta a zona de alerta
+            zonaAlertas.appendChild(divAlerta);
+        });
+    }
 }
