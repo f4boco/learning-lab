@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Exercício 6.D</title>
+</head>
+
+<body>
+    <div class="conteiner">
+
+        <head class="cabecalho">
+            <h1>Multa de Transito</h1>
+        </head>
+
+        <main>
+            <section class="secao-entrada">
+                <form id="formulario-multa">
+                    <label for="inData">Data da Infração:</label>
+                    <input type="date" id="inData" required autofocus>
+                    <label for="inValor">Valor da Infração</label>
+                    <input type="number" id="inValor" step="0.01" min="0.01" placeholder="Ex.: 120.90" required>
+                    <button type="submit">Calcular Data Limite e Valor com Desconto</button>
+                </form>
+            </section>
+            
+            <section class="secao-saida">
+                <h3>Data Limite para Pagto com Desconto: <span id="outData"></span></h3>
+                <h3>Valor com Desconto: <span id="outValor"></span></h3>
+            </section>
+        </main>
+    </div>
+    <script src="js/ex6_d.js"></script>
+</body>
+
+</html>
