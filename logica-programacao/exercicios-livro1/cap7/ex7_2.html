@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 7.2</title>
+</head>
+<body>
+    <script>
+        // função criada sem o uso de parâmetros. Manipula os argumentos através do arguments,
+        // que é um vetor que contém os argumentos passados na chamada da função
+        function calularMedia() {
+            const numNotas = arguments.length;
+
+            if (numNotas === 0) {
+                alert("Informe, no mínimo, uma nota");
+                return;
+            }
+
+            let soma = 0;
+            for (let i = 0; i < numNotas; i++) {
+                soma += arguments[i];
+            }
+
+            const media = soma / numNotas;
+            alert(`Média das Notas: ${media.toFixed(1)}`);
+        }
+
+        calularMedia(5, 6, 8); // arguments: [5, 6, 8]
+        calularMedia(2, 10); // arguments: [2, 10]
+        calularMedia(7.5, 10, 8, 9.5); // arguments: [7.5, 10, 8, 9.5]
+        calularMedia(); // arguments: []
+    </script>
+</body>
+</html>

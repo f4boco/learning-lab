@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 7.1</title>
+</head>
+<body>
+    <script>
+        // verifica a situação, comparando a media e a nota
+        function exibirSituacao(nota, media) {
+            if (nota >= media) {
+                alert("Aprovado");
+            } else {
+                alert("Reporvado");
+            }
+        }
+
+        // retorna a situação
+        function obterSituacao(nota, media) {
+            return (nota >= media) ? "Aprovado" : "Reprovado";
+        }
+
+        const n1 = Number(prompt("Qual Nota?: "));
+        exibirSituacao(n1, 7);
+        console.log(`Situação do Aluno: ${obterSituacao(n1, 7)}.`);
+    </script>
+</body>
+</html>
