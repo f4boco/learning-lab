@@ -2,6 +2,8 @@
 const outListaTodos = document.getElementById("outListaTodos");
 const outMedia = document.getElementById("outMedia");
 
+let pedidos;
+
 // FUNÇÕES AUXILIÁRES
 function gerarNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -20,16 +22,23 @@ function gerarPedidos() {
 }
 
 function atualizarHtml(listaPedidos, media) {
-    outListaTodos.innerText = listaPedidos;
-    outMedia.innerText = media;
+    if (listaPedidos !== undefined) {
+        outListaTodos.innerText = listaPedidos;
+    }
+    outMedia.innerText = media === undefined ? "Média Pedidios:" : `Média Pedidios: ${media}`;
 }
 
-// FUNÇÕES PRINCIPAIS
+// BLOCOS E FUNÇÕES PRINCIPAIS
+{ // bloco de inicialização
+    pedidos = gerarPedidos();
+    atualizarHtml(prepararStringLista(pedidos));
+}
+
 function calcularMedia(pedidos) {
-    return pedidos.reduce((acc, pedido) => {
+    return Number.parseInt(pedidos.reduce((acc, pedido) => {
         acc += pedido.numPedidos;
-        return acc / pedidos.length;
-    }, 0).toFixed(0);
+        return acc;
+    }, 0) / pedidos.length);
 }
 
 function prepararStringLista(pedidos) {
@@ -45,8 +54,6 @@ function prepararStringLista(pedidos) {
 }
 
 document.getElementById("btMedia").addEventListener("click", () => {
-    const listaPedidos = gerarPedidos();
-    const mediaPedidos = calcularMedia(listaPedidos);
-    
-    atualizarHtml(prepararStringLista(listaPedidos), mediaPedidos);
+    const mediaPedidos = calcularMedia(pedidos);
+    atualizarHtml(undefined, mediaPedidos);
 })
