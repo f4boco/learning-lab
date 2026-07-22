@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Exemplo 7.6</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * esse script cria uma saudação de "bom dia", "boa tarde" ou "boa noite" de acordo com
+         * a hora atual. depois solicita um número e mostra o dobro desse número
+        */
+        const saudacao = function (hora = new Date().getHours()) {
+            let turno;
+            if (hora >= 6 && hora < 12) {
+                turno = "Bom dia";
+            } else if (hora >= 12 && hora < 18) {
+                turno = "Boa tarde";
+            } else {
+                turno = "Boa noite";
+            }
+            return turno;
+        };
+        const num = prompt(`${saudacao()}, bem vindo(a)!\nDigite um Número para Multiplicar por 2`);
+        
+        const dobro = function (n) {
+            return n * 2;
+        }
+        alert("O dobro de " + num + " é: " + dobro(num));
+
+    </script>
+</body>
+
+</html>
