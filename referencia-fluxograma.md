@@ -190,6 +190,30 @@ Retorno
 
 ---
 
+# Loop
+
+```text
+    ┌───────────┐
+    │ Condição? │
+    └───┬─────┬─┘
+      Sim     Não
+       │        │
+       ▼        ▼
+┌─────────────┐ ┌─────────┐
+│ Executa     │ │   Fim   │
+│ o bloco     │ └─────────┘
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ Atualiza    │
+└──────┬──────┘
+       │
+       └──────────────► (volta para "Condição?")
+```
+
+---
+
 # Dicas
 
 * Use uma fonte monoespaçada (Consolas, Cascadia Code, JetBrains Mono, Fira Code).
