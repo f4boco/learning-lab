@@ -4,6 +4,26 @@
  * autor: Fabiano O.
  */
 
+// FUNÇÕES DE DOM
+function obterEntradas() {
+    const inNome = document.querySelector("#nome");
+    const inIdade = document.querySelector("#idade");
+    return {
+        nome: inNome.value.trim(),
+        idade: Number(inIdade.value)
+    }
+}
+
+function renderizarUI(informacoes) {
+    const conteinerResultado = document.querySelector("#resultado");
+    conteinerResultado.innerText = `
+    ${informacoes.nome}
+    ${informacoes.tracos}
+    Categoria: ${informacoes.categoria}
+    `;
+}
+
+// FUNÇÕES AUXILIÁRES
 function retornarTracos(nome) {
     return nome.split("").reduce((acc, caractere) => {
         if (caractere === " ") {
@@ -25,22 +45,20 @@ function categorizarAluno(idade) {
     }
 }
 
-function obterEntradas() {
-    const inNome = document.querySelector("#nome");
-    const inIdade = document.querySelector("#idade");
-    return {
-        nome: inNome.value.trim(),
-        idade: Number(inIdade.value)
-    }
-}
-
-function inicializar() {
+// FUNÇÃO PRINCIPAL
+function cadastrarAluno() {
     const aluno = obterEntradas();
-    const categoriza = categorizarAluno(aluno.idade);
+    const categoria = categorizarAluno(aluno.idade);
     const tracos = retornarTracos(aluno.nome);
+    renderizarUI({
+        nome: aluno.nome,
+        categoria: categoria,
+        tracos: tracos
+    });
 }
 
-function tester () {
-    console.log(categorizarAluno(18));
-}
-tester();
+// EVENTOS
+document.querySelector("#formulario-cadastro").addEventListener("submit", function (event) {
+    event.preventDefault();
+    cadastrarAluno();
+});
