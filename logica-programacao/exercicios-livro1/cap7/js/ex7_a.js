@@ -1,38 +1,38 @@
 /**
- * esse script recebe as informações do atleta, categoriza e exibe
+ * esse script recebe as informações do aluno, categoriza e exibe
  * 
  * autor: Fabiano O.
  */
 
+// REFERÊNCIAS AOS ELEMENTOS HTML
+const inNome = document.querySelector("#nome");
+const inIdade = document.querySelector("#idade");
+
 // FUNÇÕES DE DOM
 function obterEntradas() {
-    const inNome = document.querySelector("#nome");
-    const inIdade = document.querySelector("#idade");
     return {
         nome: inNome.value.trim(),
         idade: Number(inIdade.value)
     }
 }
 
-function renderizarUI(informacoes) {
+function renderizarUI(dadosAluno) {
     const conteinerResultado = document.querySelector("#resultado");
     conteinerResultado.innerText = `
-    ${informacoes.nome}
-    ${informacoes.tracos}
-    Categoria: ${informacoes.categoria}
+    ${dadosAluno.nome}
+    ${dadosAluno.tracos}
+    Categoria: ${dadosAluno.categoria}
     `;
 }
 
 // FUNÇÕES AUXILIÁRES
 function retornarTracos(nome) {
-    return nome.split("").reduce((acc, caractere) => {
+    return nome.split("").map(caractere => {
         if (caractere === " ") {
-            acc += " ";
-            return acc;
+            return " ";
         }
-        acc += "-";
-        return acc;
-    }, "");
+        return "-";
+    }).join("");
 }
 
 function categorizarAluno(idade) {
@@ -52,8 +52,8 @@ function cadastrarAluno() {
     const tracos = retornarTracos(aluno.nome);
     renderizarUI({
         nome: aluno.nome,
-        categoria: categoria,
-        tracos: tracos
+        categoria,
+        tracos
     });
 }
 
