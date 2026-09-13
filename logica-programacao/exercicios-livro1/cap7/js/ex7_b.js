@@ -23,26 +23,25 @@ function validarNome(nome) {
 
 function obterSobrenome(nome) {
     const vetorNomes = nome.trim().split(" ");
-    const qtdNomes = vetorNomes.length;
-    return vetorNomes[qtdNomes - 1].toLowerCase();
+    return vetorNomes[vetorNomes.length - 1].toLowerCase();
 }
 
 function contarVogais(nome) {
-    return nome.match(/[aeiou]/gi).length
-    .toString().padStart(2, "0");
+    const vogais = nome.match(/[aeiou]/gi) || [];
+    return vogais.length.toString().padStart(2, "0");
 }
 
 function gerarSenha() {
     const nome = inNome.value;
     if (!validarNome(nome)) {
-        exibirAlerta("Nome Inválido. Por Favor, exibir informe o nome completo.");
+        exibirAlerta("Nome Inválido. Por Favor, informe o nome completo.");
         return;
     }
 
     const sobreNome = obterSobrenome(nome);
     const numVogais = contarVogais(nome);
     
-    const senha = sobreNome + numVogais;
+    const senha = `Senha Inicial: ${sobreNome}${numVogais}`;
     renderizarSenha(senha);
 }
 
