@@ -14,13 +14,15 @@
         <input type="number" min="0" step="0.01" id="valor-vacina" required autofocus><br>
         <label>Possui Convênio:</label>
         <input type="radio" name="possui-convenio" value="sim"> Sim
-        <input type="radio" name="possui-convenio" value="nao"> Não <br>
+        <input type="radio" name="possui-convenio" value="nao"> Não
         <select id="convenio" class="oculta">
             <option value="" selected disabled>Selecionar</option>
             <option value="amigo">Amigo dos Animais</option>
             <option value="saude">Saúde Animal</option>
         </select> <br>
-        <button type="submit">Calcular Desconto</button>
+        <p>
+            <button type="submit">Calcular Desconto</button>
+        </p>
     </form>
     <h5 id="desconto"></h5>
     <h2 id="pagar"></h2>
