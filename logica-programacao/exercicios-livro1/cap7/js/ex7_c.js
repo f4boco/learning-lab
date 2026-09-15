@@ -26,6 +26,16 @@ function exibirValores(desconto, valorFinal) {
     outValorPagar.textContent = `A Pagar: R$ ${valorFinal.toFixed(2)}`;
 }
 
+function obterValor() {
+    return Number(inValor.value);
+}
+
+function obterConvenioSelecionado() {
+    return document.querySelector(
+        'input[name="possui-convenio"]:checked'
+    );
+}
+
 // FUNÇÕES PRINCIPAIS
 function calcularDesconto(valor, taxaDesconto) {
     return valor * (taxaDesconto / 100);
@@ -35,9 +45,19 @@ function calcularValor(valor, desconto) {
     return valor - desconto;
 }
 
-function iniciarCalculos() {
-    const valor = Number(inValor.value);
-    let desconto;
+function definirDesconto(opcaoConvenio, convenio) {
+    if (opcaoConvenio === "nao")
+        return 10;
+    
+    if (convenio === "amigo") 
+        return 20;
+
+    return 50;
+}
+
+function processarVenda() {
+    const valor = obterValor();
+
     if (!verificarEntrada(valor)) {
         alert("Informe o Valor");
         inValor.focus();
@@ -45,29 +65,19 @@ function iniciarCalculos() {
         return;
     }
 
-    const opcaoSelecionada = document.querySelector(
-        'input[name="possui-convenio"]:checked'
-    );
+    const opcaoSelecionada = obterConvenioSelecionado();
 
     if (!opcaoSelecionada) {
         alert("Selecione a informação sobre convênio");
         return;
     }
+
+    const convenio = inConvenio.value;
     
-    if (opcaoSelecionada.value === "sim") {
-        const convenioSelecionado = inConvenio.value;
-        if (convenioSelecionado === "") {
-            alert("Selecione o Convênio.");
-            inConvenio.focus();
-            return;
-        }
-        if (convenioSelecionado === "amigo")
-            desconto = 20;
-        else
-            desconto = 50;
-    } else {
-        desconto = 10;
-    }
+    const desconto = definirDesconto(
+        opcaoSelecionada.value,
+        convenio
+    );
 
     const valorDesconto = calcularDesconto(valor, desconto);
     const valorFinal = calcularValor(valor, valorDesconto);
@@ -86,5 +96,5 @@ possuiConvenio.forEach(opcao => {
 
 formularioVenda.addEventListener("submit", function(event) {
     event.preventDefault();
-    iniciarCalculos();
+    processarVenda();
 });
