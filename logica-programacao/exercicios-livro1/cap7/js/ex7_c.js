@@ -17,17 +17,13 @@ const outValorPagar = document.querySelector("#pagar");
 
 // FUNÇÕES AUXILIÁRES
 function verificarEntrada(entrada) {
-    return entrada !== 0 || !isNaN(entrada);
+    return entrada > 0 && !isNaN(entrada);
 }
 
 // FUNÇÕES DE DOM
 function exibirValores(desconto, valorFinal) {
     outDesconto.textContent = `Desconto: R$ ${desconto.toFixed(2)}`;
     outValorPagar.textContent = `A Pagar: R$ ${valorFinal.toFixed(2)}`;
-}
-
-function exibirAlerta(alerta) {
-    alert(alerta);
 }
 
 // FUNÇÕES PRINCIPAIS
@@ -49,23 +45,23 @@ function iniciarCalculos() {
         return;
     }
 
-    const convenio = document.querySelector(
+    const opcaoSelecionada = document.querySelector(
         'input[name="possui-convenio"]:checked'
     );
 
-    if (!convenio) {
+    if (!opcaoSelecionada) {
         alert("Selecione a informação sobre convênio");
         return;
     }
     
-    if (convenio.value === "sim") {
-        const convenioSecionado = inConvenio.value;
-        if (convenioSecionado === "") {
+    if (opcaoSelecionada.value === "sim") {
+        const convenioSelecionado = inConvenio.value;
+        if (convenioSelecionado === "") {
             alert("Selecione o Convênio.");
             inConvenio.focus();
             return;
         }
-        if (convenioSecionado === "amigo")
+        if (convenioSelecionado === "amigo")
             desconto = 20;
         else
             desconto = 50;
@@ -80,11 +76,8 @@ function iniciarCalculos() {
 
 // EVENTOS
 possuiConvenio.forEach(opcao => {
-    opcao.addEventListener("change", function (event) {
-        const opcaoSelecionada = document.querySelector(
-            `input[name="possui-convenio"]:checked`
-        );
-        if (opcaoSelecionada.value === "sim")
+    opcao.addEventListener("change", function () {
+        if (opcao.value === "sim")
             inConvenio.className = "exibe";
         else
             inConvenio.className = "oculta";
