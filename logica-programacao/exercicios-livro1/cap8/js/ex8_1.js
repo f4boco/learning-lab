@@ -5,7 +5,9 @@ const opcoesClubes = document.querySelectorAll(
     `input[name="clube"]`
 );
 
-const KEY_LOCAL_STORAGE = "clube";
+const STORAGE_KEYS = {
+    CLUBE: "clube"
+};
 
 function setLocalStorage(key, value) {
     localStorage.setItem(key, value);
@@ -32,7 +34,7 @@ function trocarClube() {
         divTitulo.className = "row";
         imgClube.className = "oculta";
         imgClube.alt = "";
-        removeLocalStorage(KEY_LOCAL_STORAGE);
+        removeLocalStorage(STORAGE_KEYS.CLUBE);
         return;
     }
 
@@ -42,22 +44,13 @@ function trocarClube() {
     imgClube.className = "exibe";
     imgClube.alt = `Simbolo do ${clubeSelecionado}`;
 
-    setLocalStorage(KEY_LOCAL_STORAGE, clubeSelecionado);
+    setLocalStorage(STORAGE_KEYS.CLUBE, clubeSelecionado);
 }
 
 function verificarClube() {
-    const clube = getLocalStorage(KEY_LOCAL_STORAGE);
+    const clube = getLocalStorage(STORAGE_KEYS.CLUBE);
     if (clube) {
-        switch (clube) {
-            case "Brasil" :
-                marcarRadio(`rb${clube}`);
-                break;
-            case "Pelotas" :
-                marcarRadio(`rb${clube}`);
-                break;
-            case "Farroupilha" :
-                marcarRadio(`rb${clube}`);
-        }
+        marcarRadio(`rb${clube}`);
         trocarClube();
     }
 }
