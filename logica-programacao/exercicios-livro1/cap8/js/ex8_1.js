@@ -22,7 +22,9 @@ function getLocalStorage(key) {
 }
 
 function marcarRadio(idRadio) {
-    document.querySelector(`#${idRadio}`).checked = true;
+    [...opcoesClubes].find(radio => {
+        return radio.id === idRadio;
+    }).checked = true;
 }
 
 function trocarClube() {
