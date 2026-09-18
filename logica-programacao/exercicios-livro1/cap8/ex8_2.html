@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Exemplo 8.2</title>
+</head>
+
+<body>
+    <div class="conteiner-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="imagens/melancia.webp" alt="Melancia">
+            </div>
+            <div class="col-sm-8">
+                <h1>Qual é o peso da melancia?</h1>
+                <form id="formulario-aposta">
+                    <p>
+                        <label for="inNome">Nome do Apostador:</label>
+                        <input type="text" id="inNome" class="form-control" required autofocus>
+                    </p>
+                    <p>
+                        <label for="inPeso">Peso (em gramas):</label>
+                        <input type="number" id="inPeso" class="form-control" required><br>
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Apostar</button>
+                        <button type="button" id="btVencedor" class="btn btn-warning">Vencedor</button>
+                        <button type="button" id="btLimpar" class="btn btn-danger">Limpar Apostas</button>
+                    </p>
+                    <pre id="outApostas">
+                        </pre>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/ex8_2.js"></script>
+</body>
+
+</html>
