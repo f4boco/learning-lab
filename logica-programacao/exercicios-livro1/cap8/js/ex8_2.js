@@ -68,6 +68,18 @@ function incluirAposta() {
     formularioAposta.reset();
 }
 
+function verApostaExiste(peso) {
+    const todasAsApostas = getStorage(KEYS_STORAGE.APOSTAS);
+    if (todasAsApostas) {
+        const pesoString = peso.toString();
+        return todasAsApostas.some(aposta => {
+            return aposta.peso === peso;
+        });
+    } else {
+        return false;
+    }
+}
+
 // EVENTOS
 formularioAposta.addEventListener("submit", function(event) {
     event.preventDefault();
