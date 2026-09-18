@@ -27,25 +27,35 @@ function marcarRadio(idRadio) {
     }).checked = true;
 }
 
-function trocarClube() {
-    const clubeSelecionado = document.querySelector(
-    `input[name="clube"]:checked`
+function obterClubeSelecionado() {
+    return document.querySelector(
+        `input[name="clube"]:checked`
     ).value;
+}
+
+function exibirClube(clube) {
+    divTitulo.className = "row cores" + clube;
+    imgClube.src = "imagens/" + clube.toLowerCase() + ".webp";
+    imgClube.className = "exibe";
+    imgClube.alt = `Simbolo do ${clube}`;
+}
+
+function ocultarClube() {
+    divTitulo.className = "row";
+    imgClube.className = "oculta";
+    imgClube.alt = "";
+}
+
+function trocarClube() {
+    const clubeSelecionado = obterClubeSelecionado();
 
     if (clubeSelecionado === "") {
-        divTitulo.className = "row";
-        imgClube.className = "oculta";
-        imgClube.alt = "";
+        ocultarClube();
         removeLocalStorage(STORAGE_KEYS.CLUBE);
         return;
     }
 
-    divTitulo.className = "row cores"+clubeSelecionado;
-
-    imgClube.src = "imagens/" + clubeSelecionado.toLowerCase() + ".webp";
-    imgClube.className = "exibe";
-    imgClube.alt = `Simbolo do ${clubeSelecionado}`;
-
+    exibirClube(clubeSelecionado);
     setLocalStorage(STORAGE_KEYS.CLUBE, clubeSelecionado);
 }
 
