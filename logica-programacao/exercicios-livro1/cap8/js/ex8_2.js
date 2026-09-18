@@ -3,11 +3,47 @@ const formularioAposta = document.querySelector("#formulario-aposta");
 const inNome = document.querySelector("#inNome");
 const inPeso = document.querySelector("#inPeso");
 
-function incluirAposta() {
+const KEYS_STORAGE = {
+    APOSTAS: "apostas"
+};
+
+// FUNÇÕES DOM
+function obterEntradas() {
     const nome = inNome.value.trim();
     const peso = Number(inPeso.value);
 
-    if (nome === "" || peso === 0 || isNaN(peso)) {
+    return [nome, peso];
+}
+
+// FIUNÇÕES AUXILIÁRES
+function verificarEntradas(nome, peso) {
+    return nome === "" || peso === 0 || isNaN(peso);
+}
+
+// FUNÇÕES DE localStorage
+function toJson(value) {
+    return JSON.stringify(value);
+}
+
+function fromJson(value) {
+    return JSON.parse(value);
+}
+
+function getStorage(key) {
+    return fromJson(localStorage.getItem(key));
+}
+
+function addStorage(key, value) {
+    const valuesStorage = getStorage(key) || [];
+    valuesStorage.push(value);
+    localStorage.setItem(key, toJson(valuesStorage));
+}
+
+// FUNÇÕES PRINCIPAIS
+function incluirAposta() {
+    const [nome, peso] = obterEntradas();
+
+    if (verificarEntradas(nome, peso)) {
         alert("Informe nome e peso da aposta");
         inNome.focus();
         return;
@@ -25,11 +61,15 @@ function incluirAposta() {
         peso: peso
     };
 
-    const apostas = JSON.parse(localStorage.getItem("aposta")) || [];
-    apostas.push(aposta);
-    localStorage.setItem("apostas", JSON.stringify(aposta));
+    addStorage(KEYS_STORAGE.APOSTAS, aposta);
 
     // mostrarApostas(apostas);
     
     formularioAposta.reset();
 }
+
+// EVENTOS
+formularioAposta.addEventListener("submit", function(event) {
+    event.preventDefault();
+    incluirAposta();
+});
