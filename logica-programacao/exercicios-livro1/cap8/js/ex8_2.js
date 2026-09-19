@@ -40,6 +40,10 @@ function addStorage(key, value) {
     localStorage.setItem(key, toJson(valuesStorage));
 }
 
+function clearStorage(key) {
+    localStorage.removeItem(key);
+}
+
 // FUNÇÕES PRINCIPAIS
 function incluirAposta() {
     const [nome, peso] = obterEntradas();
@@ -124,6 +128,14 @@ function verificarVencedor() {
     alert(mensagem);
 }
 
+function limparApostas() {
+    const confirmacao = confirm("Tem certeza que deseja excluir todas as apostas?");
+    if (confirmacao) {
+        clearStorage(KEYS_STORAGE.APOSTAS);
+    }
+    mostrarApostas();
+}
+
 // EVENTOS
 formularioAposta.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -131,6 +143,7 @@ formularioAposta.addEventListener("submit", function(event) {
 });
 
 document.querySelector("#btVencedor").addEventListener("click", verificarVencedor);
+document.querySelector("#btLimpar").addEventListener("click", limparApostas);
 
 // INICIALIZAÇÃO
 mostrarApostas();
