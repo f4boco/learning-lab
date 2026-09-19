@@ -96,11 +96,41 @@ function mostrarApostas() {
     outApostas.innerText = relacaoApostas;
 }
 
+function verificarVencedor() {
+    const apostas = getStorage(KEYS_STORAGE.APOSTAS);
+
+    if (!apostas) {
+        alert("Não há apostas cadastradas");
+        return;
+    }
+
+    const pesoCorreto = Number(prompt("Qual o peso correto da melancia?"));
+    if (pesoCorreto === 0 || isNaN(pesoCorreto)) 
+        return;
+
+    let vencedor = apostas[0];
+    for (let i = 1; i < apostas.length; i++) {
+        const difVencedor = Math.abs(Number(vencedor.peso) - pesoCorreto);
+        const difAposta = Math.abs(Number(apostas[i].peso) - pesoCorreto);
+
+        if (difAposta < difVencedor) 
+            vencedor = apostas[i];
+    }
+
+    let mensagem = `Resultado - Peso Correto: ${pesoCorreto}gr`;
+    mensagem += "\n----------------------------------------------";
+    mensagem += `\nVencedor: ${vencedor.nome}`;
+    mensagem += `\nAposta: ${vencedor.peso}`;
+    alert(mensagem);
+}
+
 // EVENTOS
 formularioAposta.addEventListener("submit", function(event) {
     event.preventDefault();
     incluirAposta();
 });
+
+document.querySelector("#btVencedor").addEventListener("click", verificarVencedor);
 
 // INICIALIZAÇÃO
 mostrarApostas();
