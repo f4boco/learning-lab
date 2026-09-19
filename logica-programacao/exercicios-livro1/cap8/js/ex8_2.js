@@ -2,6 +2,7 @@
 const formularioAposta = document.querySelector("#formulario-aposta");
 const inNome = document.querySelector("#inNome");
 const inPeso = document.querySelector("#inPeso");
+const outApostas = document.querySelector("#outApostas");
 
 const KEYS_STORAGE = {
     APOSTAS: "apostas"
@@ -63,7 +64,7 @@ function incluirAposta() {
 
     addStorage(KEYS_STORAGE.APOSTAS, aposta);
 
-    // mostrarApostas(apostas);
+    mostrarApostas();
     
     formularioAposta.reset();
 }
@@ -80,8 +81,26 @@ function verApostaExiste(peso) {
     }
 }
 
+function mostrarApostas() {
+    const apostas = getStorage(KEYS_STORAGE.APOSTAS);
+    if (!apostas) {
+        outApostas.innerHTML = "Nenhuma Aposta Registrada!";
+        return;
+    }
+
+    let relacaoApostas = "";
+    apostas.forEach(aposta => {
+        relacaoApostas += `${aposta.nome} = ${aposta.peso}gr \n`;
+    });
+
+    outApostas.innerText = relacaoApostas;
+}
+
 // EVENTOS
 formularioAposta.addEventListener("submit", function(event) {
     event.preventDefault();
     incluirAposta();
 });
+
+// INICIALIZAÇÃO
+mostrarApostas();
