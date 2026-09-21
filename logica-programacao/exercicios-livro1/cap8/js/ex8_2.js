@@ -16,9 +16,22 @@ function obterEntradas() {
     return [nome, peso];
 }
 
+function mostrarVencedor(pesoCorreto, vencedor) {
+    let mensagem = `Resultado - Peso Correto: ${pesoCorreto}gr`;
+    mensagem += "\n----------------------------------------------";
+    mensagem += `\nVencedor: ${vencedor.nome}`;
+    mensagem += `\nAposta: ${vencedor.peso}`;
+    alert(mensagem);
+}
+
 // FIUNÇÕES AUXILIÁRES
 function verificarEntradas(nome, peso) {
     return nome === "" || peso === 0 || isNaN(peso);
+}
+
+function solicitarPesoCorreto() {
+    const pesoCorreto = Number(prompt("Qual o peso correto da melancia?"));
+    return pesoCorreto === 0 || isNaN(pesoCorreto) ? true : pesoCorreto;
 }
 
 // FUNÇÕES DE localStorage
@@ -78,7 +91,7 @@ function verApostaExiste(peso) {
     if (todasAsApostas) {
         const pesoString = peso.toString();
         return todasAsApostas.some(aposta => {
-            return aposta.peso === peso;
+            return aposta.peso === pesoString;
         });
     } else {
         return false;
@@ -108,8 +121,8 @@ function verificarVencedor() {
         return;
     }
 
-    const pesoCorreto = Number(prompt("Qual o peso correto da melancia?"));
-    if (pesoCorreto === 0 || isNaN(pesoCorreto)) 
+    const pesoCorreto = solicitarPesoCorreto();
+    if (pesoCorreto === true) 
         return;
 
     let vencedor = apostas[0];
@@ -121,11 +134,7 @@ function verificarVencedor() {
             vencedor = apostas[i];
     }
 
-    let mensagem = `Resultado - Peso Correto: ${pesoCorreto}gr`;
-    mensagem += "\n----------------------------------------------";
-    mensagem += `\nVencedor: ${vencedor.nome}`;
-    mensagem += `\nAposta: ${vencedor.peso}`;
-    alert(mensagem);
+    mostrarVencedor(pesoCorreto, vencedor);
 }
 
 function limparApostas() {
