@@ -26,12 +26,16 @@ function mostrarVencedor(pesoCorreto, vencedor) {
 
 // FIUNÇÕES AUXILIÁRES
 function verificarEntradas(nome, peso) {
-    return nome === "" || peso === 0 || isNaN(peso);
+    return !(nome === "" || peso <= 0 || isNaN(peso));
 }
 
 function solicitarPesoCorreto() {
     const pesoCorreto = Number(prompt("Qual o peso correto da melancia?"));
-    return pesoCorreto === 0 || isNaN(pesoCorreto) ? true : pesoCorreto;
+
+    if (pesoCorreto <= 0 || isNaN(pesoCorreto))
+        return null;
+
+    return pesoCorreto;
 }
 
 // FUNÇÕES DE localStorage
@@ -61,7 +65,7 @@ function clearStorage(key) {
 function incluirAposta() {
     const [nome, peso] = obterEntradas();
 
-    if (verificarEntradas(nome, peso)) {
+    if (!verificarEntradas(nome, peso)) {
         alert("Informe nome e peso da aposta");
         inNome.focus();
         return;
@@ -82,33 +86,29 @@ function incluirAposta() {
     addStorage(KEYS_STORAGE.APOSTAS, aposta);
 
     mostrarApostas();
-    
+
     formularioAposta.reset();
 }
 
 function verApostaExiste(peso) {
-    const todasAsApostas = getStorage(KEYS_STORAGE.APOSTAS);
-    if (todasAsApostas) {
-        const pesoString = peso.toString();
-        return todasAsApostas.some(aposta => {
-            return aposta.peso === pesoString;
-        });
-    } else {
-        return false;
-    }
+    const todasAsApostas = getStorage(KEYS_STORAGE.APOSTAS) || [];
+
+    const pesoString = peso.toString();
+    return todasAsApostas.some(aposta => {
+        return aposta.peso === pesoString;
+    });
 }
 
 function mostrarApostas() {
     const apostas = getStorage(KEYS_STORAGE.APOSTAS);
     if (!apostas) {
-        outApostas.innerHTML = "Nenhuma Aposta Registrada!";
+        outApostas.textContent = "Nenhuma Aposta Registrada!";
         return;
     }
 
-    let relacaoApostas = "";
-    apostas.forEach(aposta => {
-        relacaoApostas += `${aposta.nome} = ${aposta.peso}gr \n`;
-    });
+    const relacaoApostas = apostas.map(aposta => 
+        `${aposta.nome} = ${aposta.peso}gr`
+    ).join("\n");
 
     outApostas.innerText = relacaoApostas;
 }
@@ -122,7 +122,7 @@ function verificarVencedor() {
     }
 
     const pesoCorreto = solicitarPesoCorreto();
-    if (pesoCorreto === true) 
+    if (pesoCorreto === null)
         return;
 
     let vencedor = apostas[0];
@@ -130,7 +130,7 @@ function verificarVencedor() {
         const difVencedor = Math.abs(Number(vencedor.peso) - pesoCorreto);
         const difAposta = Math.abs(Number(apostas[i].peso) - pesoCorreto);
 
-        if (difAposta < difVencedor) 
+        if (difAposta < difVencedor)
             vencedor = apostas[i];
     }
 
@@ -146,7 +146,7 @@ function limparApostas() {
 }
 
 // EVENTOS
-formularioAposta.addEventListener("submit", function(event) {
+formularioAposta.addEventListener("submit", function (event) {
     event.preventDefault();
     incluirAposta();
 });
