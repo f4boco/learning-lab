@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">nk
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Exercício 8.B</title>
+</head>
+<body>
+    <div class="conteiner-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="imagens/compras.png" alt="Lista de Compras">
+            </div>
+            <div class="col-sm-8">
+                <h1>Compras da Semana</h1>
+                <form id="formulario-lista">
+                    <p>
+                        <label for="inProduto">Produto:</label>
+                        <input type="text" id="inProduto" class="form-control" required autofocus>
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                        <button class="btn btn-danger" id="btnLimpar">Limpar</button>
+                    </p>
+                    <p>
+                        <pre id="outLista"></pre>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/ex8_b.js"></script>
+</body>
+</html>
