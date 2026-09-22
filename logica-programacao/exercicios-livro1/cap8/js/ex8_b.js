@@ -37,7 +37,7 @@ function removeStorage(key) {
 
 // FUNÇÕES DE DOM
 function obterEntradaProduto() {
-    return inProduto.value;
+    return inProduto.value.trim();
 }
 
 function exibirLista(lista) {
@@ -46,12 +46,11 @@ function exibirLista(lista) {
 
 // FUNÇÕES AUXILIÁRES
 function validarNomeProduto(nomeProduto) {
-    const nome = nomeProduto.trim();
-    return !(nome === "" || !isNaN(nome));
+    return nomeProduto !== "" && isNaN(nomeProduto);
 }
 
 function ordenarVetor(vetor) {
-    return vetor.sort();
+    vetor.sort();
     /* A função receberá uma referência para o vetor, logo o vetor original será ordenado e
     será retornado uma referência a ele */
 }
@@ -61,17 +60,17 @@ function montarLista(produtos) {
         return `Não há produtos cadastrados`;
     }
 
-    return produtos.reduce((acc, produto) => {
-        return acc += `\n${produto}`;
-    }, `Produtos Adicionados\n------------------------`);
+    return `Produtos Adicionados
+------------------------
+${produtos.join("\n")}`;
 }
 
 // FUNÇÕES PRINCIPAIS
 function adicionarProduto(produto) {
-    const localProdutos = getStorage(KEYS_STORAGE.PRODUTOS) || [];
-
     if (!validarNomeProduto(produto))
         return;
+
+    const localProdutos = getStorage(KEYS_STORAGE.PRODUTOS) || [];
 
     localProdutos.push(produto);
     ordenarVetor(localProdutos);
@@ -89,6 +88,11 @@ function limparLista() {
     }
 }
 
+function inicializarEventos () {
+    const localProdutos = getStorage(KEYS_STORAGE.PRODUTOS) || [];
+    exibirLista(montarLista(localProdutos));
+}
+
 // EVENTOS
 formulario.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -96,9 +100,7 @@ formulario.addEventListener("submit", function(event) {
     adicionarProduto(produto);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const localProdutos = getStorage(KEYS_STORAGE.PRODUTOS) || [];
-    exibirLista(montarLista(localProdutos));
-});
-
 document.querySelector("#btnLimpar").addEventListener("click", limparLista);
+
+// INÍCIO
+inicializarEventos();
