@@ -83,8 +83,10 @@ function adicionarProduto(produto) {
 }
 
 function limparLista() {
-    removeStorage(KEYS_STORAGE.PRODUTOS);
-    exibirLista(montarLista([]));
+    if (confirm("Realmente deseja apagar a Lista?")) {
+        removeStorage(KEYS_STORAGE.PRODUTOS);
+        exibirLista(montarLista([]));
+    }
 }
 
 // EVENTOS
