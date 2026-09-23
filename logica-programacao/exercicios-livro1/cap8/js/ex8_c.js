@@ -41,7 +41,7 @@ function atualizarServicosPendentes(numServicos) {
     outPendentes.textContent = numServicos;
 }
 
-function exibirEmExecucao(servico) {
+function exibirEmExecucao(servico = " - ") {
     outServico.textContent = servico;
 }
 
@@ -70,7 +70,7 @@ function adicionarServico(servico) {
 }
 
 function executarServico() {
-    const localServicos = getStorage(KEYS_STORAGE.SERVICOS);
+    const localServicos = getStorage(KEYS_STORAGE.SERVICOS) || [];
     const servicoExecutado = localServicos.shift();
     exibirEmExecucao(servicoExecutado);
 
