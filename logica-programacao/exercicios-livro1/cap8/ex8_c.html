@@ -20,19 +20,23 @@
                 <form id="formulario-servico">
                     <p>
                         <label for="inServico">Serviço - Veículo:</label>
-                        <input type="text" id="inServico" class="form-control" placeholder="Ex.: Revisão de 20 km - Gol Branco XYZ-0123" autofocus required>
+                        <input type="text" id="inServico" class="form-control"
+                            placeholder="Ex.: Revisão de 20 km - Gol Branco XYZ-0123" autofocus required>
                     </p>
                     <p>
                         <button type="submit" class="btn btn-primary">Adicionar Serviço</button>
-                        <input type="button" id="btnExecutarServico" class="btn btn-danger" value="Executar serviço"></input>
+                        <input type="button" id="btnExecutarServico" class="btn btn-danger"
+                            value="Executar serviço"></input>
                     </p>
                 </form>
             </div>
         </div>
-        <div class="row">
-            <h3>Serviços Pendentes: <span id="outPendentes">0</span></h3>
-            <small>Serviços em Execução:</small>
-            <h4 id="outServico"></h4>
+        <div class="row justify-content-end mb-3">
+            <div class="col-auto">
+                <h3 class="fw-bold">Serviços Pendentes: <span id="outPendentes" class="text-danger">0</span></h3>
+                <div class="bg-danger text-white p-1 mb-3 fw-bold">Serviços em Execução:</div>
+                <p class="fs-5 fst-italic" id="outServico"></p>
+            </div>
         </div>
     </div>
     <script src="js/ex8_c.js"></script>
