@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Exercício 8.C</title>
+</head>
+
+<body>
+    <div class="conteiner-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="imagens/compras.png" alt="Relatório">
+            </div>
+            <div class="col-sm-10">
+                <h1>Herbie: Controle de Serviços</h1>
+                <form id="formulario-servico">
+                    <p>
+                        <label for="inServico">Serviço - Veículo:</label>
+                        <input type="text" id="inServico" class="form-control" placeholder="Ex.: Revisão de 20 km - Gol Branco XYZ-0123" autofocus required>
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Adicionar Serviço</button>
+                        <input type="button" id="btnExecutarServico" class="btn btn-danger" value="Executar serviço"></input>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <h3>Serviços Pendentes: <span id="outPendentes">0</span></h3>
+            <small>Serviços em Execução:</small>
+            <h4 id="outServico"></h4>
+        </div>
+    </div>
+    <script src="js/ex8_c.js"></script>
+</body>
+
+</html>
